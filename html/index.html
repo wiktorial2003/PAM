@@ -19,22 +19,22 @@
       const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
         center: location,
+        mapId: '4cd92f36fb2ff143b1b66208'
       });
 
       // Place a marker at the location (optional)
-      const marker = new google.maps.marker.AdvancedMarkerElement({
-        position: location,
-        map: map,
-        title: "Pollen data location"
-      });
+    //   const marker = new google.maps.marker.AdvancedMarkerElement({
+    //     position: location,
+    //     map: map,
+    //     title: "Pollen data location"
+    //   });
 
       // You can add more markers or overlays here later
     }
   </script>
 
-  <!-- Load Google Maps JS API, replace YOUR_MAPS_API_KEY -->
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap&libraries=marker">
   </script>
 </body>
 </html>
