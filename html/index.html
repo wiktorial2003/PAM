@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pollen Map</title>
+  <title>PAM</title>
   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #F5F5DC;
+      color: #2F4F2F;
+    }
+    nav {
+      width: 100%;
+      background: #9CAF88;
+      padding: 1rem 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    nav a {
+      color: #F5F5DC;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+    }
+    nav a:hover {
+      background: #7A8471;
+    }
+    h1 {
+      text-align: center;
+      margin: 2rem 0;
+      color: #2F4F2F;
+    }
     #map {
       height: 500px;
-      width: 100%;
+      width: 80%;
+      max-width: 800px;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#Types">Pollen Types</a></li>
+      <li><a href="#data">Data Trends</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
   <h1>Pollen Forecast Map</h1>
   <div id="map"></div>
 
