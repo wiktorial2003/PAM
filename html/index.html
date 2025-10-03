@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Simple Page</title>
+  <title>Pollen Map</title>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a very simple HTML page.</p>
+  <h1>Pollen Forecast Map</h1>
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const location = { lat: 32.32, lng: 35.32 };
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: location,
+      });
+
+      // Place a marker at the location (optional)
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        position: location,
+        map: map,
+        title: "Pollen data location"
+      });
+
+      // You can add more markers or overlays here later
+    }
+  </script>
+
+  <!-- Load Google Maps JS API, replace YOUR_MAPS_API_KEY -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap">
+  </script>
 </body>
 </html>
