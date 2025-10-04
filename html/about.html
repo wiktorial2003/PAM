@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>PAM - About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #F5F5DC;
-      color: #2F4F2F;
-      min-height: 100vh;  /* Ensure full height for body */
-  justify-content: flex-start; /* Keep content at the top */
-  padding: 0 2rem; /* Add some padding on left and right */
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #EDE6D6;
+      color: #1a1a1a;
+      /* line-height: 1.6;
+      overflow-x: hidden; */
+      min-height: 100vh;
+      padding: 20px;
+    }
+
     nav {
-      width: 100%;
-      background: #9CAF88;
+      width: auto;
+      background: #18392B;
       padding: 1rem 0;
       position: relative;
     }
+
     .logo {
       position: absolute;
       left: 1rem;
@@ -28,6 +35,7 @@
       transform: translateY(-50%);
       height: 200px;
     }
+
     nav ul {
       list-style: none;
       margin: 0;
@@ -36,47 +44,426 @@
       justify-content: center;
       gap: 2rem;
     }
+
     nav a {
       color: #F5F5DC;
       text-decoration: none;
       padding: 0.5rem 1rem;
+      /* transition: background 0.3s ease; */
     }
+
     nav a:hover {
       background: #7A8471;
     }
-    h1 {
+
+    .hero {
+      padding: 4rem 2rem 3rem;
       text-align: center;
-      margin: 2rem 0;
-      color: #2F4F2F;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .intro-panel {
-      background: #9CAF88;
-      color: #F5F5DC;
-      padding: 2rem;
-      margin: 2rem 0;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 800px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #18392B;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+      line-height: 1.1;
     }
-    .intro-panel:hover {
-      background: #7A8471;
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-    .intro-panel h2 {
-      font-size: 2.5rem;
-      margin: 0 0 1rem 0;
-      color: #F5F5DC;
-    }
-    .intro-panel p {
+
+    .hero p {
       font-size: 1.2rem;
-      margin: 0;
+      color: #666;
+      font-weight: 400;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-small {
+      padding: 2rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #18392B;
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .text-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #18392B;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .text-content p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: #18392B;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: #EDE6D6;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .feature-card h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #18392B;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .stats-section {
+      background: #18392B;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      color: white;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.3rem;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    .dark-section {
+      background: #18392B;
+      color: #EDE6D6;
+      padding: 3rem 2rem;
+    }
+
+    .dark-section .section-title {
+      color: #EDE6D6;
+    }
+
+    .dark-section p {
+      color: rgba(237, 230, 214, 0.8);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #18392B;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #EDE6D6;
+      font-weight: 600;
+    }
+
+    .team-member h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .team-member p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .cta-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #18392B 0%, #2a5a43 100%);
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #18392B;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: 2rem auto 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-left: 2rem;
+      border-left: 2px solid rgba(237, 230, 214, 0.3);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #EDE6D6;
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      min-width: 100px;
+      color: rgba(237, 230, 214, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .timeline-content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    .split-bg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 400px;
+    }
+
+    .split-content {
+      padding: 3rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .split-left {
+      background: #18392B;
+      color: #EDE6D6;
+    }
+
+    .split-right {
+      background: #EDE6D6;
+      color: #18392B;
+    }
+
+    .split-content h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .split-content ul {
+      list-style: none;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .split-content ul li {
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.8rem;
+    }
+
+    .split-content ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .sources-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-top: 20px;
+    }
+
+    .sources-list li {
+      margin-bottom: 18px;
+    }
+
+    .sources-list a {
+      font-weight: 600;
+      color: #18392B;
+      text-decoration: none;
+    }
+
+    .sources-list a:hover {
+      text-decoration: underline;
+      color: #18392B;
+    }
+
+    .sources-list span {
+      display: block;
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 968px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .two-col,
+      .split-bg {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 5rem 1rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section {
+        padding: 4rem 1rem;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <nav>
     <img src="../LOGO.png" alt="PAM Logo" class="logo">
@@ -84,15 +471,205 @@
       <li><a href="main.html">Home</a></li>
       <li><a href="types.html">Pollen Types</a></li>
       <li><a href="data.html">Data Trends</a></li>
+      <li><a href="ndvi.html">Forecast</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </nav>
-  
-  <h1>About P.A.M</h1>
-  
-  <div class="intro-panel">
-    <h2>Our Mission</h2>
-    <p>P.A.M (Pollen Alert Monitor) is dedicated to providing accurate, real-time pollen information to help you manage allergies and plan your day better.</p>
+
+  <div class="hero">
+    <h1>Breathe easier with P.A.M</h1>
+    <p>Advanced pollen forecasting powered by NASA satellite data, helping millions manage allergies smarter.</p>
+  </div>
+
+  <div class="split-bg">
+    <div class="split-content split-left">
+      <h3>The Problem</h3>
+      <ul>
+        <li>50M+ Americans suffer from allergies</li>
+        <li>Traditional forecasts lack accuracy</li>
+        <li>No personalized predictions</li>
+        <li>Limited planning capabilities</li>
+        <li>Complex data, hard to understand</li>
+      </ul>
+    </div>
+    <div class="split-content split-right">
+      <h3>Our Solution</h3>
+      <ul>
+        <li>NASA-powered satellite analysis</li>
+        <li>20-day predictive forecasts</li>
+        <li>Location-specific insights</li>
+        <li>Clear risk classifications</li>
+        <li>Actionable recommendations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title center">What makes us different</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+
+        <h4>NASA Technology</h4>
+        <p>We leverage MODIS NDVI satellite data for unparalleled accuracy in vegetation monitoring and pollen
+          prediction.</p>
+      </div>
+      <div class="feature-card">
+
+        <h4>20-Day Forecasts</h4>
+        <p>Plan ahead with extended predictions. Know what's coming before it affects you.</p>
+      </div>
+      <div class="feature-card">
+
+        <h4>Type-Specific Data</h4>
+        <p>Track tree, grass, and weed pollen separately to understand your specific triggers.</p>
+      </div>
+      <div class="feature-card">
+
+        <h4>Smart Analytics</h4>
+        <p>Machine learning algorithms process complex environmental data into simple, actionable insights.</p>
+      </div>
+      <div class="feature-card">
+
+        <h4>Interactive Maps</h4>
+        <p>Visualize pollen levels across your area with intuitive, real-time mapping.</p>
+      </div>
+      <div class="feature-card">
+
+        <h4>Daily Guidance</h4>
+        <p>Receive personalized recommendations based on current and forecasted pollen levels.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="stat-number">20+</span>
+        <span class="stat-label">Days Ahead</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">65</span>
+        <span class="stat-label">Locations</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">99%</span>
+        <span class="stat-label">Accuracy</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title center">How it works</h2>
+    <div class="two-col">
+      <div class="text-content">
+        <h3>Advanced Science, Simple Interface</h3>
+        <p>We combine NASA's MODIS satellite vegetation data with proprietary machine learning models to predict pollen
+          levels up to 20 days in advance.</p>
+        <p>Our algorithms analyze vegetation health, seasonal patterns, and environmental conditions to forecast when
+          pollen counts will spike in your area.</p>
+      </div>
+      <div class="text-content">
+        <h3>Data You Can Trust</h3>
+        <p>Every prediction is backed by real-time satellite imagery and validated against ground-level pollen
+          monitoring stations.</p>
+        <p>We update our forecasts continuously, ensuring you always have the most accurate information to plan your
+          day.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section">
+    <h2 class="section-title center">Meet the team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-avatar">W</div>
+        <h4>WIK</h4>
+        <p>[Role]</p>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">K</div>
+        <h4>KAT</h4>
+        <p>[Role]</p>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">F</div>
+        <h4>FAT</h4>
+        <p>[Role]</p>
+      </div>
+      <div class="team-member">
+        <div class="team-avatar">M</div>
+        <h4>MAV</h4>
+        <p>dev</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title center">Data & Research Sources</h2>
+
+    <div class="text-content">
+      <ul class="sources-list">
+        <li>
+          <a href="https://appeears.earthdatacloud.nasa.gov/" target="_blank">
+            NASA EarthData — MODIS Terra Vegetation Indices (MOD13Q1.061)
+          </a>
+          <span>250m resolution, 16-day NDVI composites for vegetation activity monitoring.</span>
+        </li>
+
+        <li>
+          <a href="https://www.niehs.nih.gov/health/topics/agents/pollen" target="_blank">
+            National Institute of Environmental Health Sciences (NIEHS) — Pollen & Health
+          </a>
+          <span>Understanding the health impacts of airborne pollen and seasonal allergies.</span>
+        </li>
+
+        <li>
+          <a href="https://www.pnas.org/doi/10.1073/pnas.2100008118" target="_blank">
+            PNAS — Anthropogenic Climate Change & Worsening Pollen Seasons
+          </a>
+          <span>Peer-reviewed evidence on the link between climate trends and pollen intensity.</span>
+        </li>
+
+        <li>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9041883/" target="_blank">
+            NCBI — Pollen Calendars and Maps of Allergenic Pollen in North America
+          </a>
+          <span>Historical pollen mapping to enhance allergy diagnosis and awareness.</span>
+        </li>
+
+        <li>
+          <a href="https://www.ncei.noaa.gov/products/pollen" target="_blank">
+            NOAA National Centers for Environmental Information (NCEI) — Pollen Records
+          </a>
+          <span>Long-term pollen accumulation records for climate and vegetation research.</span>
+        </li>
+
+        <li>
+          <a href="https://www.climatecentral.org/news/report-longer-growing-season-longer-allergy-season-2025"
+            target="_blank">
+            Climate Central — Longer Growing Season, Longer Allergy Season
+          </a>
+          <span>Analysis of U.S. city-level pollen season extensions due to warming trends.</span>
+        </li>
+
+        <li>
+          <a href="https://www.cbsnews.com/news/allergy-map-2025-us-cities-spring-allergies/" target="_blank">
+            CBS News — 2025 Spring Allergy Map
+          </a>
+          <span>Recent allergy forecast highlighting the most affected U.S. regions.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <div class="cta-section">
+    <h2>Ready to breathe easier?</h2>
+    <p>Join thousands who trust P.A.M for accurate pollen forecasts</p>
+    <a href="ndvi.html" class="cta-button">Check Today's Forecast</a>
   </div>
 </body>
+
 </html>
