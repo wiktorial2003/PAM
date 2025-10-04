@@ -1,43 +1,46 @@
-async function initMap() {
-  const location = { lat: 32.32, lng: 35.32 };
-  const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: location,
-  });
+  // function getNormalizedCoord(coord, zoom) {
+  //   const y = coord.y;
+  //   let x = coord.x;
+  //   // Define the tile range in one direction. The range is dependent on zoom level:
+  //   // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc.
+  //   const tileRange = 1 << zoom;
 
-  const marker = new google.maps.marker.AdvancedMarkerElement({
-    position: location,
-    map: map,
-    title: "Pollen data location"
-  });
+  //   // don't repeat across y-axis (vertically)
+  //   if (y < 0 || y >= tileRange) {
+  //     return null;
+  //   }
 
-  const API_KEY = 'AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ';
-  const url = `https://pollen.googleapis.com/v1/forecast:lookup?key=${API_KEY}&location.longitude=${location.lng}&location.latitude=${location.lat}&days=1`;
+  //   // repeat across x-axis
+  //   if (x < 0 || x >= tileRange) {
+  //     x = ((x % tileRange) + tileRange) % tileRange;
+  //   }
+  //   return { x: x, y: y };
+  // }
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Pollen API request failed');
-    const data = await response.json();
+  // let pollen = "TREE_UPI"
+  // class PollenMapType {
+  //   tileSize;
+  //   alt = null;
+  //   maxZoom = 16;
+  //   minZoom = 3;
+  //   name = null;
+  //   projection = null;
+  //   radius = 6378137;
+  //   constructor(tileSize) {
+  //     this.tileSize = tileSize;
+  //   }
 
-    // Extract pollen info for today
-    const today = data.dailyInfo[0];
-    const pollenInfo = today.pollenTypeInfo.map(type => 
-      `${type.displayName}: ${type.indexInfo?.category || 'No data'}`
-    ).join('<br>');
+  //   getTile(coord, zoom, ownerDocument) {
+  //     const img = ownerDocument.createElement("img");
+  //     const mapType = pollen;
+  //     const normalizedCoord = getNormalizedCoord(coord, zoom);
 
-    const infoWindow = new google.maps.InfoWindow({
-      content: `<div><strong>Date:</strong> ${today.date.year}-${today.date.month}-${today.date.day}<br>${pollenInfo}</div>`
-    });
-
-    // Open info window on marker click
-    marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-    });
-
-    // Optionally open info window immediately
-    infoWindow.open(map, marker);
-
-  } catch (error) {
-    console.error('Error loading pollen data:', error);
-  }
-}
+  //     const x = coord.x;
+  //     const y = coord.y;
+  //     const key = "AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ";
+  //     img.style.opacity = 0.8;
+  //     img.src = `https://pollen.googleapis.com/v1/mapTypes/${mapType}/heatmapTiles/${zoom}/${x}/${y}?key=${key}`;
+  //     return img;
+  //   }
+  //   releaseTile(tile) {}
+  // }
