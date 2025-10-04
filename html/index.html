@@ -1,19 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pollen Map</title>
+  <title>PAM</title>
   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #F5F5DC;
+      color: #2F4F2F;
+    }
+    nav {
+      width: 100%;
+      background: #9CAF88;
+      padding: 1rem 0;
+      position: relative;
+    }
+    .logo {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 200px;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    nav a {
+      color: #F5F5DC;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+    }
+    nav a:hover {
+      background: #7A8471;
+    }
+    h1 {
+      text-align: center;
+      margin: 2rem 0;
+      color: #2F4F2F;
+    }
+    .intro-panel {
+      background: #9CAF88;
+      color: #F5F5DC;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .intro-panel:hover {
+      background: #7A8471;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .intro-panel h2 {
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      color: #F5F5DC;
+    }
+    .intro-panel p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
     #map {
       height: 500px;
-      width: 100%;
+      width: 80%;
+      max-width: 800px;
     }
+    .map-key {
+      background: white;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .key-item {
+      display: flex;
+      align-items: center;
+      margin: 0.5rem 0;
+    }
+    .key-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .low { background-color: #90EE90; }
+    .moderate { background-color: #FFD700; }
+    .high { background-color: #FFA500; }
+    .very-high { background-color: #FF6347; }
   </style>
 </head>
 <body>
+  <nav>
+    <img src="../LOGO.png" alt="PAM Logo" class="logo">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="types.html">Pollen Types</a></li>
+      <li><a href="data.html">Data Trends</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+  
+  
+  <div class="intro-panel">
+    <h2>Welcome to P.A.M</h2>
+    <p>Pollen Alert Monitor - Your comprehensive solution for real-time pollen tracking and forecasting. Stay informed, stay healthy.</p>
+  </div>
   <h1>Pollen Forecast Map</h1>
   <div id="map"></div>
 
-  <script>
+  <div class="map-key">
+    <h3>Pollen Level Key</h3>
+    <div class="key-item">
+      <div class="key-color low"></div>
+      <span>Low (0-2.4) - Minimal symptoms</span>
+    </div>
+    <div class="key-item">
+      <div class="key-color moderate"></div>
+      <span>Moderate (2.5-4.8) - Mild symptoms possible</span>
+    </div>
+    <div class="key-item">
+      <div class="key-color high"></div>
+      <span>High (4.9-7.2) - Noticeable symptoms</span>
+    </div>
+    <div class="key-item">
+      <div class="key-color very-high"></div>
+      <span>Very High (7.3+) - Severe symptoms likely</span>
+    </div>
+  </div>
+
+   <script>
     function initMap() {
       const location = { lat: 32.32, lng: 35.32 };
       const map = new google.maps.Map(document.getElementById('map'), {
@@ -21,20 +150,21 @@
         center: location,
         mapId: '4cd92f36fb2ff143b1b66208'
       });
-
+ 
       // Place a marker at the location (optional)
     //   const marker = new google.maps.marker.AdvancedMarkerElement({
     //     position: location,
     //     map: map,
     //     title: "Pollen data location"
     //   });
-
+ 
       // You can add more markers or overlays here later
     }
   </script>
 
+  <!-- Load Google Maps JS API, replace YOUR_MAPS_API_KEY -->
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap&libraries=marker">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap">
   </script>
 </body>
 </html>
