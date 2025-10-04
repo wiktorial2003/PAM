@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>PAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -9,7 +10,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: #F5F5DC;
+      background-color: #ffffff;
       color: #2F4F2F;
     }
     nav {
@@ -23,7 +24,8 @@
       left: 1rem;
       top: 50%;
       transform: translateY(-50%);
-      height: 200px;
+      height: 50px;
+      width: auto;
     }
     nav ul {
       list-style: none;
@@ -48,7 +50,7 @@
     }
     .intro-panel {
       background: #9CAF88;
-      color: #F5F5DC;
+      color: #fafafa;
       padding: 2rem;
       margin: 2rem 0;
       border-radius: 10px;
@@ -77,30 +79,75 @@
       width: 80%;
       max-width: 800px;
     }
-    .map-key {
-      background: white;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 800px;
+  
+
+    body, html {
+     margin: 0;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    #vanta-bg {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    .preview{
+      background:#a9b69e;
+      text-align: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      
+      border-radius: 10px;
     }
-    .key-item {
-      display: flex;
-      align-items: center;
-      margin: 0.5rem 0;
-    }
-    .key-color {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-    .low { background-color: #90EE90; }
-    .moderate { background-color: #FFD700; }
-    .high { background-color: #FFA500; }
-    .very-high { background-color: #FF6347; }
+
+    /* Container needed to position the button. Adjust the width as needed */
+.container {
+  position: relative;
+  width: 50%;
+}
+
+/* Make the image responsive */
+.container img {
+  width: 100%;
+  height: auto;
+}
+
+/* Style the button and place it in the middle of the container/image */
+.container .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #df600b;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.container .btn:hover {
+  background-color: rgb(223, 177, 52);
+}
+
   </style>
 </head>
 <body>
@@ -113,34 +160,51 @@
       <li><a href="about.html">About</a></li>
     </ul>
   </nav>
-  
-  
+ 
+ <div id="vanta-bg"></div>
+
+
+  <!-- Include THREE.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<!-- Include the Vanta.js effect you want (example: BIRDS) -->
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+
+<script>
+  VANTA.BIRDS({
+    el: "#vanta-bg",          // target element
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    backgroundColor: 0x3d8553,
+    color1: 0xffff00,         // Primary bird color (yellow)
+    color2: 0xffcc00          // Secondary bird color (optional, also yellowish)
+  });
+</script>
+
   <div class="intro-panel">
     <h2>Welcome to P.A.M</h2>
-    <p>Pollen Alert Monitor - Your comprehensive solution for real-time pollen tracking and forecasting. Stay informed, stay healthy.</p>
+    <p>Pollen Alert Map - Your comprehensive solution for real-time pollen tracking and forecasting. Stay informed, stay healthy.</p>
   </div>
-  <h1>Pollen Forecast Map</h1>
-  <div id="map"></div>
+  
+  <div class="preview">
+    <h2>Pollen Forecast Map Preview</h2>
+  </div>
+  
+  <div class="container">
+  <img src="Map.png" alt="map">
+  <a href="mapui.html">
+  <button class="btn" >Click here to access the map</button>
+  </a>
+</div>
 
-  <div class="map-key">
-    <h3>Pollen Level Key</h3>
-    <div class="key-item">
-      <div class="key-color low"></div>
-      <span>Low (0-2.4) - Minimal symptoms</span>
+  <div>
+    <p>Random page</p>
     </div>
-    <div class="key-item">
-      <div class="key-color moderate"></div>
-      <span>Moderate (2.5-4.8) - Mild symptoms possible</span>
-    </div>
-    <div class="key-item">
-      <div class="key-color high"></div>
-      <span>High (4.9-7.2) - Noticeable symptoms</span>
-    </div>
-    <div class="key-item">
-      <div class="key-color very-high"></div>
-      <span>Very High (7.3+) - Severe symptoms likely</span>
-    </div>
-  </div>
 
    <script>
     function initMap() {
@@ -166,5 +230,7 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap">
   </script>
+
+
 </body>
 </html>
