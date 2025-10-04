@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA-Powered Pollen Forecast for Hay Fever</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; }
+        h1 { text-align: center; margin: 10px; }
+        .container { display: flex; flex-wrap: wrap; }
+        #map { height: 400px; width: 50%; }
+        #chart { height: 400px; width: 50%; display: flex; justify-content: center; align-items: flex-end; position: relative; }
+        .nasa-logo { position: absolute; top: 10px; right: 10px; width: 100px; }
+        .controls { text-align: center; margin: 10px; }
+        .legend { margin: 10px; }
+        .legend div { display: inline-block; margin-right: 20px; }
+        .tips { margin: 10px; font-size: 14px; }
+        .bar { display: inline-block; margin: 0 10px; position: relative; }
+        .bar div { width: 40px; text-align: center; }
+        .bar-label { position: absolute; bottom: -20px; }
+        .bar-value { position: absolute; top: -20px; color: black; }
+        .tooltip { position: absolute; background: rgba(0,0,0,0.8); color: white; padding: 5px; border-radius: 3px; display: none; }
+        .y-axis { position: absolute; left: 0; height: 360px; width: 40px; text-align: right; }
+        .y-axis div { margin-bottom: 62px; }
+        @media (max-width: 800px) {
+            #map, #chart { width: 100%; height: 300px; }
+            .y-axis div { margin-bottom: 44px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>NASA-Powered Pollen Forecast for Hay Fever</h1>
+    <img src="https://www.nasa.gov/wp-content/uploads/2023/03/nasa-logo-web-rgb.png" class="nasa-logo" alt="NASA Logo"/>
+    <div class="controls">
+        <label for="dateSlider">Select Date: </label>
+        <input type="range" id="dateSlider" min="0" max="19" value="0">
+        <span id="selectedDate"></span>
+    </div>
+    <div class="legend">
+        <div><span style="color:red">■</span> High Risk (>4)</div>
+        <div><span style="color:yellow">■</span> Moderate Risk (>2)</div>
+        <div><span style="color:green">■</span> Low Risk (≤2)</div>
+        <div><span style="color:blue">■</span> Combined Index</div>
+        <div><span style="color:#4CAF50">■</span> NASA NDVI</div>
+    </div>
+    <div class="container">
+        <div id="map"></div>
+        <div id="chart">
+            <div class="y-axis">
+                <div>5</div><div>4</div><div>3</div><div>2</div><div>1</div><div>0</div>
+            </div>
+        </div>
+    </div>
+    <div class="tips">
+        <b>Hay Fever Tips:</b>
+        <ul>
+            <li><b>High Risk (>4):</b> Take antihistamines, avoid outdoor activities, keep windows closed.</li>
+            <li><b>Moderate Risk (>2):</b> Monitor symptoms, consider medication, limit outdoor time.</li>
+            <li><b>Low Risk (≤2):</b> Safe for outdoor activities, minimal precautions needed.</li>
+        </ul>
+    </div>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap"></script>
+    <script>
+        let map, allForecasts = [];
+        const slider = document.getElementById('dateSlider');
+        const dateLabel = document.getElementById('selectedDate');
+        const chart = document.getElementById('chart');
+
+        function getRiskLevel(index) {
+            return index > 4 ? 'High Risk' : index > 2 ? 'Moderate Risk' : 'Low Risk';
+        }
+
+        function getMarkerIcon(color) {
+            return `https://maps.google.com/mapfiles/ms/icons/${color}-dot.png`;
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 32.7767, lng: -96.7970 },
+                zoom: 10,
+                mapTypeControl: false,
+                attributionControl: false
+            });
+            const attribution = document.createElement('div');
+            attribution.innerHTML = 'Data &copy; NASA MODIS';
+            attribution.style.fontSize = '10px';
+            attribution.style.padding = '2px';
+            map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(attribution);
+
+            fetch('/data/predicted_pollen_20days.json')
+                .then(response => response.json())
+                .then(forecasts => {
+                    allForecasts = forecasts;
+                    const uniqueDates = [...new Set(forecasts.map(d => d.date))];
+                    slider.max = uniqueDates.length - 1;
+                    dateLabel.textContent = uniqueDates[0];
+
+                    function updateDisplay(index) {
+                        const date = uniqueDates[index];
+                        dateLabel.textContent = date;
+
+                        // Clear existing markers
+                        map.markers = map.markers || [];
+                        map.markers.forEach(marker => marker.setMap(null));
+                        map.markers = [];
+
+                        // Add marker
+                        const entries = allForecasts.filter(d => d.date === date);
+                        const maxIndex = Math.max(...entries.map(e => e.projected_index));
+                        const color = maxIndex > 4 ? 'red' : maxIndex > 2 ? 'yellow' : 'green';
+                        let content = `<b>${date} (NASA-Powered)</b><br>`;
+                        entries.forEach(e => {
+                            const riskColor = e.projected_index > 4 ? 'red' : e.projected_index > 2 ? 'yellow' : 'green';
+                            content += `<span style="color:${riskColor}">${e.pollen_type}: Index ${e.projected_index} (${getRiskLevel(e.projected_index)}, ${e.ndvi_influence})</span><br>`;
+                        });
+                        content += `<b>Tips:</b> ${entries.some(e => e.projected_index > 4) ? 'Take antihistamines, avoid outdoors.' : entries.some(e => e.projected_index > 2) ? 'Monitor symptoms, limit outdoor time.' : 'Safe for outdoor activities.'}`;
+                        const infoWindow = new google.maps.InfoWindow({ content });
+                        const marker = new google.maps.Marker({
+                            position: { lat: 32.7767, lng: -96.7970 },
+                            map,
+                            icon: getMarkerIcon(color)
+                        });
+                        marker.addListener('click', () => infoWindow.open(map, marker));
+                        map.markers.push(marker);
+
+                        // Update bar chart
+                        chart.innerHTML = '<div class="y-axis"><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div><div>0</div></div>';
+                        // const types = ['TREE', 'GRASS', 'WEED', 'COMBINED', 'NDVI'];
+                        const types = ['TREE', 'GRASS', 'WEED', 'COMBINED'];
+                        const colors = { TREE: 'green', GRASS: 'yellow', WEED: 'red', COMBINED: 'blue'};
+                        types.forEach(type => {
+                            const bar = document.createElement('div');
+                            bar.className = 'bar';
+                            let value, tooltipText;
+                            if (type === 'NDVI') {
+                                value = parseFloat(entries[0].ndvi_influence.split(' ')[1]) * 5; // Scale NDVI (0-1) to 0-5
+                                tooltipText = `NASA NDVI: ${parseFloat(entries[0].ndvi_influence.split(' ')[1]).toFixed(3)}`;
+                            } else {
+                                const entry = entries.find(d => d.pollen_type === type);
+                                value = entry.projected_index;
+                                tooltipText = `${type}: Index ${value.toFixed(2)} (${getRiskLevel(value)})`;
+                            }
+                            const height = (value / 5) * 360; // Scale to chart height
+                            bar.innerHTML = `<div style="background:${colors[type]};height:${height}px;"></div>
+                                            <div class="bar-label">${type}</div>
+                                            <div class="bar-value">${value.toFixed(2)}</div>
+                                            <div class="tooltip">${tooltipText}</div>`;
+                            chart.appendChild(bar);
+                        });
+
+                        // Add tooltips
+                        document.querySelectorAll('.bar').forEach(bar => {
+                            const tooltip = bar.querySelector('.tooltip');
+                            bar.addEventListener('mouseenter', () => {
+                                tooltip.style.display = 'block';
+                                tooltip.style.top = `${bar.querySelector('div').offsetHeight - 30}px`;
+                                tooltip.style.left = '50%';
+                                tooltip.style.transform = 'translateX(-50%)';
+                            });
+                            bar.addEventListener('mouseleave', () => {
+                                tooltip.style.display = 'none';
+                            });
+                        });
+
+                        // Highlight high weed index
+                        const highWeed = entries.find(d => d.date === '2026-04-10' && d.pollen_type === 'WEED');
+                        if (highWeed && date === highWeed.date) {
+                            const note = document.createElement('div');
+                            note.style.position = 'absolute';
+                            note.style.top = '10px';
+                            note.style.left = '50%';
+                            note.style.transform = 'translateX(-50%)';
+                            note.style.color = 'red';
+                            note.textContent = 'High Weed Risk (NDVI 0.333)';
+                            chart.appendChild(note);
+                        }
+                    }
+
+                    slider.addEventListener('input', () => updateDisplay(slider.value));
+                    updateDisplay(0);
+                })
+                .catch(error => console.error('Error loading JSON:', error));
+        }
+    </script>
+</body>
+</html>

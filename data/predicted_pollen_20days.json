@@ -1,0 +1,562 @@
+[
+  {
+    "date": "2025-10-04",
+    "pollen_type": "TREE",
+    "original_index": 5,
+    "projected_index": 4.81,
+    "ndvi_influence": "NDVI 0.288 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-04",
+    "pollen_type": "GRASS",
+    "original_index": 2,
+    "projected_index": 1.92,
+    "ndvi_influence": "NDVI 0.288 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-04",
+    "pollen_type": "WEED",
+    "original_index": 4,
+    "projected_index": 3.85,
+    "ndvi_influence": "NDVI 0.288 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-04",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.53,
+    "ndvi_influence": "NDVI 0.288 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-05",
+    "pollen_type": "TREE",
+    "original_index": 4,
+    "projected_index": 3.94,
+    "ndvi_influence": "NDVI 0.295 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-05",
+    "pollen_type": "GRASS",
+    "original_index": 2,
+    "projected_index": 1.97,
+    "ndvi_influence": "NDVI 0.295 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-05",
+    "pollen_type": "WEED",
+    "original_index": 4,
+    "projected_index": 3.94,
+    "ndvi_influence": "NDVI 0.295 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-05",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.28,
+    "ndvi_influence": "NDVI 0.295 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-06",
+    "pollen_type": "TREE",
+    "original_index": 4,
+    "projected_index": 4.09,
+    "ndvi_influence": "NDVI 0.306 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-06",
+    "pollen_type": "GRASS",
+    "original_index": 2,
+    "projected_index": 2.04,
+    "ndvi_influence": "NDVI 0.306 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-06",
+    "pollen_type": "WEED",
+    "original_index": 4,
+    "projected_index": 4.09,
+    "ndvi_influence": "NDVI 0.306 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-06",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.41,
+    "ndvi_influence": "NDVI 0.306 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-07",
+    "pollen_type": "TREE",
+    "original_index": 3,
+    "projected_index": 3.03,
+    "ndvi_influence": "NDVI 0.303 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-07",
+    "pollen_type": "GRASS",
+    "original_index": 1,
+    "projected_index": 1.01,
+    "ndvi_influence": "NDVI 0.303 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-07",
+    "pollen_type": "WEED",
+    "original_index": 4,
+    "projected_index": 4.04,
+    "ndvi_influence": "NDVI 0.303 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-07",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 2.69,
+    "ndvi_influence": "NDVI 0.303 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-08",
+    "pollen_type": "TREE",
+    "original_index": 4,
+    "projected_index": 4.03,
+    "ndvi_influence": "NDVI 0.302 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-08",
+    "pollen_type": "GRASS",
+    "original_index": 2,
+    "projected_index": 2.02,
+    "ndvi_influence": "NDVI 0.302 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-08",
+    "pollen_type": "WEED",
+    "original_index": 4,
+    "projected_index": 4.03,
+    "ndvi_influence": "NDVI 0.302 + Trend 0.0018"
+  },
+  {
+    "date": "2025-10-08",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.36,
+    "ndvi_influence": "NDVI 0.302 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-03",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.08,
+    "ndvi_influence": "NDVI 0.305 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-03",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.04,
+    "ndvi_influence": "NDVI 0.305 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-03",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.08,
+    "ndvi_influence": "NDVI 0.305 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-03",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.4,
+    "ndvi_influence": "NDVI 0.305 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-19",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 3.98,
+    "ndvi_influence": "NDVI 0.298 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-19",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 1.99,
+    "ndvi_influence": "NDVI 0.298 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-19",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 3.98,
+    "ndvi_influence": "NDVI 0.298 + Trend 0.0018"
+  },
+  {
+    "date": "2025-12-19",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.32,
+    "ndvi_influence": "NDVI 0.298 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-04",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.14,
+    "ndvi_influence": "NDVI 0.310 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-04",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.07,
+    "ndvi_influence": "NDVI 0.310 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-04",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.14,
+    "ndvi_influence": "NDVI 0.310 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-04",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.45,
+    "ndvi_influence": "NDVI 0.310 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-20",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.2,
+    "ndvi_influence": "NDVI 0.315 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-20",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.1,
+    "ndvi_influence": "NDVI 0.315 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-20",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.2,
+    "ndvi_influence": "NDVI 0.315 + Trend 0.0018"
+  },
+  {
+    "date": "2026-01-20",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.5,
+    "ndvi_influence": "NDVI 0.315 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-05",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.18,
+    "ndvi_influence": "NDVI 0.313 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-05",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.09,
+    "ndvi_influence": "NDVI 0.313 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-05",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.18,
+    "ndvi_influence": "NDVI 0.313 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-05",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.48,
+    "ndvi_influence": "NDVI 0.313 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-21",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.25,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-21",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.12,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-21",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.25,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-02-21",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.54,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-09",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.24,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-09",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.12,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-09",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.24,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-09",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.53,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-25",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.25,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-25",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.13,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-25",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.25,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-03-25",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.54,
+    "ndvi_influence": "NDVI 0.318 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-10",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.45,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-10",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.23,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-10",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.45,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-10",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.71,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-26",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.32,
+    "ndvi_influence": "NDVI 0.323 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-26",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.16,
+    "ndvi_influence": "NDVI 0.323 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-26",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.32,
+    "ndvi_influence": "NDVI 0.323 + Trend 0.0018"
+  },
+  {
+    "date": "2026-04-26",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.6,
+    "ndvi_influence": "NDVI 0.323 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-12",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.26,
+    "ndvi_influence": "NDVI 0.319 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-12",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.13,
+    "ndvi_influence": "NDVI 0.319 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-12",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.26,
+    "ndvi_influence": "NDVI 0.319 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-12",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.55,
+    "ndvi_influence": "NDVI 0.319 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-28",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.27,
+    "ndvi_influence": "NDVI 0.320 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-28",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.14,
+    "ndvi_influence": "NDVI 0.320 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-28",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.27,
+    "ndvi_influence": "NDVI 0.320 + Trend 0.0018"
+  },
+  {
+    "date": "2026-05-28",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.56,
+    "ndvi_influence": "NDVI 0.320 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-13",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.38,
+    "ndvi_influence": "NDVI 0.328 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-13",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.19,
+    "ndvi_influence": "NDVI 0.328 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-13",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.38,
+    "ndvi_influence": "NDVI 0.328 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-13",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.65,
+    "ndvi_influence": "NDVI 0.328 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-29",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.44,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-29",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.22,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-29",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.44,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-06-29",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.7,
+    "ndvi_influence": "NDVI 0.333 + Trend 0.0018"
+  },
+  {
+    "date": "2026-07-15",
+    "pollen_type": "TREE",
+    "original_index": null,
+    "projected_index": 4.29,
+    "ndvi_influence": "NDVI 0.321 + Trend 0.0018"
+  },
+  {
+    "date": "2026-07-15",
+    "pollen_type": "GRASS",
+    "original_index": null,
+    "projected_index": 2.14,
+    "ndvi_influence": "NDVI 0.321 + Trend 0.0018"
+  },
+  {
+    "date": "2026-07-15",
+    "pollen_type": "WEED",
+    "original_index": null,
+    "projected_index": 4.29,
+    "ndvi_influence": "NDVI 0.321 + Trend 0.0018"
+  },
+  {
+    "date": "2026-07-15",
+    "pollen_type": "COMBINED",
+    "original_index": null,
+    "projected_index": 3.57,
+    "ndvi_influence": "NDVI 0.321 + Trend 0.0018"
+  }
+]
