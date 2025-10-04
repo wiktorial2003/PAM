@@ -88,7 +88,7 @@
   <nav>
     <img src="../LOGO.png" alt="PAM Logo" class="logo">
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="main.html">Home</a></li>
       <li><a href="types.html">Pollen Types</a></li>
       <li><a href="data.html">Data Trends</a></li>
       <li><a href="about.html">About</a></li>
@@ -109,76 +109,118 @@
   <!-- D3.js Library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
-  <script>
-    // Sample data for demonstration (replace with your actual unemployment data)
-    const unemployment = [
-      {rate: 0.1}, {rate: 3.2}, {rate: 5.1}, {rate: 6.7}, {rate: 2.9},
-      {rate: 4.9}, {rate: 3.3}, {rate: 5.4}, {rate: 6.1}, {rate: 3.8},
-      {rate: 5.0}, {rate: 4.4}, {rate: 6.3}, {rate: 7.2}, {rate: 3.5}
-      // Add more as needed...
-    ];
+ Here’s the complete example using your chart code, with the addition of loading the data:
 
-    function drawChart() {
-      const width = 960;
-      const height = 500;
-      const marginTop = 20;
-      const marginRight = 20;
-      const marginBottom = 30;
-      const marginLeft = 40;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unemployment Rate Histogram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
 
-      const bins = d3.bin()
-          .thresholds(40)
-          .value((d) => d.rate)(unemployment);
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
 
-      const x = d3.scaleLinear()
-          .domain([bins[0].x0, bins[bins.length - 1].x1])
-          .range([marginLeft, width - marginRight]);
+<script>
+    // Function to load and process data from an external JSON file
+    async function loadData() {
+        const unemployment = await d3.json("unemployment.json"); // replace with your actual JSON file URL
 
-      const y = d3.scaleLinear()
-          .domain([0, d3.max(bins, (d) => d.length)])
-          .range([height - marginBottom, marginTop]);
-
-      const svg = d3.create("svg")
-          .attr("width", width)
-          .attr("height", height)
-          .attr("viewBox", [0, 0, width, height])
-          .attr("style", "max-width: 100%; height: auto;");
-
-      svg.append("g")
-          .attr("fill", "steelblue")
-        .selectAll("rect")
-        .data(bins)
-        .join("rect")
-          .attr("x", (d) => x(d.x0) + 1)
-          .attr("width", (d) => Math.max(0, x(d.x1) - x(d.x0) - 1))
-          .attr("y", (d) => y(d.length))
-          .attr("height", (d) => y(0) - y(d.length));
-
-      svg.append("g")
-          .attr("transform", `translate(0,${height - marginBottom})`)
-          .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-          .call((g) => g.append("text")
-              .attr("x", width)
-              .attr("y", marginBottom - 4)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "end")
-              .text("Unemployment rate (%) →"));
-
-      svg.append("g")
-          .attr("transform", `translate(${marginLeft},0)`)
-          .call(d3.axisLeft(y).ticks(height / 40))
-          .call((g) => g.select(".domain").remove())
-          .call((g) => g.append("text")
-              .attr("x", -marginLeft)
-              .attr("y", 10)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "start")
-              .text("↑ Frequency (no. of counties)"));
-
-      document.getElementById("chart-container").appendChild(svg.node());
+        return unemployment.map(d => d.rate); // Assuming 'rate' is the unemployment rate in the data
     }
 
-    drawChart();
-  </script>
+    // Chart code
+    const chart = (unemployment) => {
+        const width = 960;
+        const height = 500;
+        const marginTop = 20;
+        const marginRight = 20;
+        const marginBottom = 30;
+        const marginLeft = 40;
+
+        // Bin the data
+        const bins = d3.bin()
+            .thresholds(40)
+            .value((d) => d)
+        (unemployment);
+
+        // Declare the x (horizontal position) scale
+        const x = d3.scaleLinear()
+            .domain([bins[0].x0, bins[bins.length - 1].x1])
+            .range([marginLeft, width - marginRight]);
+
+        // Declare the y (vertical position) scale
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(bins, (d) => d.length)])
+            .range([height - marginBottom, marginTop]);
+
+        // Create the SVG container
+        const svg = d3.create("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", [0, 0, width, height])
+            .attr("style", "max-width: 100%; height: auto;");
+
+        // Add a rect for each bin
+        svg.append("g")
+            .attr("fill", "steelblue")
+        .selectAll()
+        .data(bins)
+        .join("rect")
+            .attr("x", (d) => x(d.x0) + 1)
+            .attr("width", (d) => x(d.x1) - x(d.x0) - 1)
+            .attr("y", (d) => y(d.length))
+            .attr("height", (d) => y(0) - y(d.length));
+
+        // Add the x-axis and label
+        svg.append("g")
+            .attr("transform", `translate(0,${height - marginBottom})`)
+            .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+            .call((g) => g.append("text")
+                .attr("x", width)
+                .attr("y", marginBottom - 4)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "end")
+                .text("Unemployment rate (%) →"));
+
+        // Add the y-axis and label, and remove the domain line
+        svg.append("g")
+            .attr("transform", `translate(${marginLeft},0)`)
+            .call(d3.axisLeft(y).ticks(height / 40))
+            .call((g) => g.select(".domain").remove())
+            .call((g) => g.append("text")
+                .attr("x", -marginLeft)
+                .attr("y", 10)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .text("↑ Frequency (no. of counties)"));
+
+        // Return the SVG element
+        return svg.node();
+    };
+
+    // Load data and create chart
+    loadData().then(unemployment => {
+        const chartNode = chart(unemployment); // Generate the chart with the data
+        document.body.appendChild(chartNode);  // Append the chart to the body
+    });
+</script>
 </body>
 </html>
