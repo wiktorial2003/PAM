@@ -111,6 +111,56 @@
       color: currentColor;
       letter-spacing: 0.06em;
     }
+    .pollen-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .flip-card-container {
+      display: flex;
+      gap: 2rem; 
+      justify-content: center; 
+    }
+
+    .flip-card {
+      width: 300px;
+      height: 300px; 
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+      background-color: #bbb;
+      color: black;
+    }
+
+    .flip-card-back {
+      background-color: #2980b9;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+
   </style>
 </head>
 <body>
@@ -130,7 +180,7 @@
   <div class="large grid centered square-grid">
   <h2 class="text-xl">Common Pollen Types</h2>
 </div>
-    <p>Learn about different types of pollen that affect air quality and allergies in your area.</p>
+    <p>Learn about different types of pollen that affect air quality and allergies, and examples of each</p>
   </div>
 
   
@@ -139,13 +189,138 @@
       <h3>Tree Pollen</h3>
       <p>Common in spring, tree pollen from oak, birch, and maple trees can trigger seasonal allergies.</p>
     </div>
+
+   <div class="flip-card-container">
+    <!-- Flip Card 1 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Tree</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Tree</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+        <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Tree</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
     <div class="pollen-card">
       <h3>Grass Pollen</h3>
       <p>Peak season is late spring to early summer. Bermuda and Timothy grass are major contributors.</p>
     </div>
+    <div class="flip-card-container">
+    <!-- Flip Card 2 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Grass</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Grass</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+        <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Grass</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="pollen-card">
       <h3>Weed Pollen</h3>
       <p>Most active in fall, ragweed is the most common weed pollen causing allergic reactions.</p>
+    </div>
+  </div>
+  <div class="flip-card-container">
+    <!-- Flip Card 3 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Weed</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Weed</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
+    </div>
+        <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+          <h1>Weed</h1>
+          <p>Found in</p>
+          <p>Blooms in</p>
+        </div>
+      </div>
     </div>
   </div>
   
