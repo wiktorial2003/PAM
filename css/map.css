@@ -1,0 +1,369 @@
+/* Container layout */ 
+
+    #container { 
+
+      display: flex; 
+
+      flex-direction: row; 
+
+    } 
+
+ 
+
+ 
+
+    /* Sidebar */ 
+
+    #sidebar { 
+
+      width: 300px; 
+
+      padding: 15px; 
+
+      background-color: #fff; 
+
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
+      display: flex; 
+
+      flex-direction: column; 
+
+      gap: 10px; 
+
+      overflow-y: auto; 
+
+    } 
+
+ 
+
+    #map { 
+
+      height: 80vh; 
+
+      width: 75%; 
+
+    } 
+
+ 
+
+    /* Buttons */ 
+
+    button { 
+
+      padding: 8px 12px; 
+
+      border: none; 
+
+      border-radius: 4px; 
+
+      font-weight: bold; 
+
+      cursor: pointer; 
+
+      transition: 0.2s; 
+
+      color: #fff; 
+
+    } 
+
+ 
+
+    button:hover { 
+
+      opacity: 0.9; 
+
+    } 
+
+ 
+
+    #tree { 
+
+      background: #009c1a; 
+
+    } 
+
+ 
+
+    #grass { 
+
+      background: #22b600; 
+
+    } 
+
+ 
+
+    #weed { 
+
+      background: #26cc00; 
+
+    } 
+
+ 
+
+    #searchBtn { 
+
+      background: #007bff; 
+
+    } 
+
+ 
+
+    #startBtn { 
+
+      background: #28a745; 
+
+    } 
+
+ 
+
+    #pauseBtn { 
+
+      background: #dc3545; 
+
+    } 
+
+ 
+
+    /* Inputs */ 
+
+    input[type="text"], 
+
+    input[type="date"] { 
+
+      padding: 8px; 
+
+      border: 1px solid #ccc; 
+
+      border-radius: 4px; 
+
+      width: 100%; 
+
+      box-sizing: border-box; 
+
+    } 
+
+ 
+
+    #sidePanel { 
+
+      width: 25%; 
+
+      background: #fdfdfd; 
+
+      border-left: 1px solid #ddd; 
+
+      padding: 15px; 
+
+      font-family: Arial, sans-serif; 
+
+      overflow-y: auto; 
+
+    } 
+
+ 
+
+   #pollenInfoPanel { 
+
+  background-color: rgba(255, 255, 255, 0.95); 
+
+  padding: 12px; 
+
+  border-radius: 6px; 
+
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); 
+
+  font-size: 14px; 
+
+  max-height: 250px; 
+
+  overflow-y: auto; 
+
+} 
+
+ 
+
+#pollenLegend { 
+
+  margin-top: 10px; 
+
+  padding-top: 8px; 
+
+  border-top: 1px solid #ccc; 
+
+} 
+
+ 
+
+#pollenLegend h4 { 
+
+  margin: 0 0 6px; 
+
+} 
+
+ 
+
+#pollenLegend div { 
+
+  margin-bottom: 4px; 
+
+  display: flex; 
+
+  align-items: center; 
+
+} 
+
+ 
+
+#pollenLegend span { 
+
+  display: inline-block; 
+
+  width: 16px; 
+
+  height: 16px; 
+
+  margin-right: 6px; 
+
+  border: 1px solid #000; 
+
+} 
+
+ 
+
+ 
+
+    #timeLapseControls { 
+
+      display: flex; 
+
+      align-items: center; 
+
+      justify-content: center; 
+
+      gap: 15px; 
+
+      margin-top: 10px; 
+
+    } 
+
+ 
+
+    #timeLapseControls button { 
+
+      width: 40px; 
+
+      height: 40px; 
+
+      border-radius: 50%; 
+
+      font-size: 18px; 
+
+      font-weight: bold; 
+
+      color: white; 
+
+      background: #007bff; 
+
+      border: none; 
+
+      cursor: pointer; 
+
+      transition: 0.2s; 
+
+    } 
+
+ 
+
+    #timeLapseControls button:hover { 
+
+      background: #0056b3; 
+
+    } 
+
+ 
+
+    #currentDateLabel { 
+
+      font-weight: bold; 
+
+      font-size: 16px; 
+
+    } 
+
+ 
+
+    #infoButtons { 
+
+      display: flex; 
+
+      gap: 10px; 
+
+      margin-top: 10px; 
+
+    } 
+
+ 
+
+    .info-btn { 
+
+      display: flex; 
+
+      align-items: center; 
+
+      gap: 6px; 
+
+      background: #272525; 
+
+      border: 1px solid #ccc; 
+
+      padding: 6px 12px; 
+
+      border-radius: 6px; 
+
+      font-size: 14px; 
+
+      cursor: pointer; 
+
+      transition: background 0.2s; 
+
+    } 
+
+ 
+
+    .info-btn:hover { 
+
+      background: #eaeaea; 
+
+    } 
+
+ 
+
+    .icon { 
+
+      font-size: 16px; 
+
+    } 
+
+ 
+
+    .info-tooltip { 
+
+      display: none; 
+
+      background: #fff; 
+
+      border: 1px solid #ddd; 
+
+      padding: 8px; 
+
+      margin-top: 5px; 
+
+      border-radius: 6px; 
+
+      font-size: 13px; 
+
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); 
+
+      max-width: 250px; 
+
+    } 

@@ -3,96 +3,7 @@
 
 <head>
   <title>Ireland Pollen Map</title>
-  <style>
-   /* Container layout */
-#container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  font-family: Arial, sans-serif;
-}
-
-/* Sidebar */
-#sidebar {
-  width: 300px;
-  padding: 15px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
-}
-
-/* Map */
-#map {
-  flex: 1;
-  height: 100%;
-}
-
-/* Buttons */
-button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
-  color: #fff;
-}
-
-button:hover { opacity: 0.9; }
-#tree { background: #009c1a; }
-#grass { background: #22b600; }
-#weed { background: #26cc00; }
-#searchBtn { background: #007bff; }
-#startBtn { background: #28a745; }
-#pauseBtn { background: #dc3545; }
-
-/* Inputs */
-input[type="text"], input[type="date"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Legend */
-#pollenLegend {
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 6px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-}
-
-#pollenLegend div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-#pollenLegend span {
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  border-radius: 50%;
-  display: inline-block;
-  border: 1px solid #000;
-}
-
-/* Info Panel */
-#pollenInfoPanel {
-  background-color: rgba(255,255,255,0.95);
-  padding: 10px;
-  border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
-  font-size: 14px;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-  </style>
+<link rel="stylesheet" href="../css/map.css">
 </head>
 
 <body>
@@ -115,22 +26,50 @@ input[type="text"], input[type="date"] {
 
       <!-- Time-lapse Controls -->
       <div id="timeLapseControls">
-        <button id="startBtn">Start</button>
-        <button id="pauseBtn">Pause</button>
+        <button id="prevBtn">⬅</button>
+        <span id="currentDateLabel">--</span>
+        <button id="nextBtn">➡</button>
       </div>
 
-      <!-- Legend -->
-      <div id="pollenLegend" style="display:none;">
-        <h4>Pollen Intensity</h4>
-        <div><span style="background:green;"></span> Low</div>
-        <div><span style="background:yellow;"></span> Moderate</div>
-        <div><span style="background:orange;"></span> High</div>
-        <div><span style="background:red;"></span> Very High</div>
-        <div><span style="background:purple;"></span> Extreme</div>
-      </div>
 
       <!-- Info Panel -->
-      <div id="pollenInfoPanel"></div>
+      <div id="pollenInfoPanel">
+        <h3>Pollen Information ⓘ</h3>
+        <div id="forecastDetails">Select a location to see pollen levels.</div>
+        </div>
+
+        <!-- Legend inside Info Panel -->
+        <div id="pollenLegend">
+          <h4>Pollen Intensity</h4>
+          <div><span style="background:green;"></span> Low</div>
+          <div><span style="background:yellow;"></span> Moderate</div>
+          <div><span style="background:orange;"></span> High</div>
+          <div><span style="background:red;"></span> Very High</div>
+          <div><span style="background:purple;"></span> Extreme</div>
+        </div>
+      
+
+
+
+      <!-- Info Buttons -->
+      <div id="infoButtons">
+        <button class="info-btn" id="tree0">
+          <span class="icon">🌳</span> Tree Plants
+        </button>
+        <button class="info-btn" id="grass0">
+          <span class="icon">🌾</span> Grass Plants
+        </button>
+        <button class="info-btn" id="weed0">
+          <span class="icon">🌱</span> Weed Plants
+        </button>
+      </div>
+
+      <!-- Tooltip containers -->
+      <div id="treeInfo" class="info-tooltip">Alder, Ash, Birch, Cottonwood, Elm, Maple, Olive, Juniper, Oak, Pine,
+        Cypress pine, Hazel.</div>
+      <div id="grassInfo" class="info-tooltip">Grasses.</div>
+      <div id="weedInfo" class="info-tooltip">Ragweed, Mugworth.</div>
+
     </div>
 
     <!-- Map -->
@@ -138,16 +77,12 @@ input[type="text"], input[type="date"] {
   </div>
 </body>
 
+<script src="../js/main.js"></script>
 
-
-
-
-<script src="../js/index.js"></script>
-
-  <script
-    src="https://maps.googleapis.com/maps/api/js?callback=initMap&v=weekly&key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&language=en"
-    defer>
-    </script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?callback=initMap&v=weekly&key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&language=en"
+  defer>
+  </script>
 </body>
 
 </html>

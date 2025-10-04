@@ -1,3 +1,4 @@
+
 let map;
 let geocoder;
 let pollen = "TREE_UPI";
@@ -83,17 +84,16 @@ function updateMapAndUIForDate(forecast, location) {
   // Optional: center and zoom map
   map.setCenter(location);
   map.setZoom(10);
-}
-
 
   // Update info panel
-  const infoPanel = document.getElementById('pollenInfoPanel');
-  if (infoPanel) {
-    infoPanel.innerText = forecast.pollenTypeInfo.map(p =>
-      `${p.displayName}: ${p.indexInfo.category} - ${p.healthRecommendations.join(' ')}`
-    ).join('\n');
-  }
+const infoPanel = document.getElementById('pollenInfoPanel');
+if (infoPanel) {
+  infoPanel.innerHTML = forecast.pollenTypeInfo.map(p =>
+    `<div><strong>${p.displayName}:</strong> ${p.indexInfo.category}<br><small>${p.healthRecommendations.join(', ')}</small></div>`
+  ).join('');
+}
 
+}
 
 
 // 🔹 Central function to update display for any date
@@ -176,9 +176,9 @@ function initMap() {
     streetViewControl: false,
   });
 
-  const legend = document.getElementById('pollenLegend');
-  legend.style.display = 'block';
-  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+  // const legend = document.getElementById('pollenLegend');
+  // legend.style.display = 'block';
+  // map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
 
   pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
   map.overlayMapTypes.insertAt(0, pollenMapType);
@@ -234,10 +234,46 @@ function initMap() {
   document.querySelector("#grass").addEventListener("click", () => { pollen = "GRASS_UPI"; updatePollenOverlayAndMarker(); });
   document.querySelector("#weed").addEventListener("click", () => { pollen = "WEED_UPI"; updatePollenOverlayAndMarker(); });
 
-  // Time-lapse buttons
-  document.getElementById('startBtn').addEventListener('click', startTimeLapse);
-  document.getElementById('pauseBtn').addEventListener('click', () => {
-    if (timeLapseInterval) clearInterval(timeLapseInterval);
-    timeLapseInterval = null;
+  let currentIndex = 0;
+
+function showDateAtIndex(index) {
+  if (!forecastDates.length) return;
+  if (index < 0) index = forecastDates.length - 1;
+  if (index >= forecastDates.length) index = 0;
+
+  currentIndex = index;
+  const dateStr = forecastDates[currentIndex];
+  updateDisplayForDate(dateStr);
+
+  // update label (user friendly date)
+  const d = new Date(dateStr);
+  const friendlyDate = d.toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' });
+  document.getElementById("currentDateLabel").innerText = friendlyDate;
+}
+
+// Arrows
+document.getElementById("prevBtn").addEventListener("click", () => {
+  showDateAtIndex(currentIndex - 1);
+});
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  showDateAtIndex(currentIndex + 1);
+});
+
+function setupInfoButton(buttonId, tooltipId) {
+  const btn = document.getElementById(buttonId);
+  const tooltip = document.getElementById(tooltipId);
+
+  btn.addEventListener("click", () => {
+    const isVisible = tooltip.style.display === "block";
+    document.querySelectorAll(".info-tooltip").forEach(el => el.style.display = "none");
+    tooltip.style.display = isVisible ? "none" : "block";
   });
+}
+
+setupInfoButton("tree0", "treeInfo");
+setupInfoButton("grass0", "grassInfo");
+setupInfoButton("weed0", "weedInfo");
+
+
 }
