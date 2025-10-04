@@ -1,132 +1,302 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ireland Pollen Map</title>
-     <style>
-      #map {
-      height: 100vh;  /* full viewport height */
-     width: 100%;
+
+<head>
+  <title>Ireland Pollen Map</title>
+  <style>
+    #map {
+      height: 70vh;
+      /* full viewport height */
+      width: 70%;
     }
 
-    button{
-    width:100px;
-    height:34px; 
-    /*top:50px;*/
-    display:inline-block;
-    position:relative;
-    text-align:center;
-    border:none;
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.29);
-    color:#FFF;
-    font-weight:400;
-    border-radius:4px;
-    margin-left:4px;
-    font-family:"Google Sans","Roboto","Arial";
-    line-height:1em;
-  }
-    #tree{background:#009c1a}
-    #grass{background:#22b600}
-    #weed{background:#26cc00}
-    button:active{background:#999999 !important;}
+    button {
+      width: 100px;
+      height: 34px;
+      /*top:50px;*/
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      border: none;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.29);
+      color: #FFF;
+      font-weight: 400;
+      border-radius: 4px;
+      margin-left: 4px;
+      font-family: "Google Sans", "Roboto", "Arial";
+      line-height: 1em;
+    }
+
+    #tree {
+      background: #009c1a
+    }
+
+    #grass {
+      background: #22b600
+    }
+
+    #weed {
+      background: #26cc00
+    }
+
+    button:active {
+      background: #999999 !important;
+    }
   </style>
-  </head>
-  <body>
-    <div id="container">
-      <button id="tree">TREE</button>
-      <button id="grass">GRASS</button>
-      <button id="weed">WEED</button>
-    </div>
-    <div id="map"></div>  
-  <script>
-      function getNormalizedCoord(coord, zoom) {
-    const y = coord.y;
-    let x = coord.x;
-    // Define the tile range in one direction. The range is dependent on zoom level:
-    // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc.
-    const tileRange = 100 << zoom;
+</head>
 
-    // don't repeat across y-axis (vertically)
-    if (y < 0 || y >= tileRange) {
-      return null;
+<body>
+  <div id="container">
+    <button id="tree">TREE</button>
+    <button id="grass">GRASS</button>
+    <button id="weed">WEED</button>
+  </div>
+  <div id="map"></div>
+  <input type="text" id="locationInput" placeholder="Enter location">
+  <button id="searchBtn">Search</button>
+  <input type="date" id="dateInput" />
+  <button id="startBtn">Start</button>
+  <button id="pauseBtn">Pause</button>
+
+
+<script>
+    let timeLapseIndex = 0;
+    let timeLapseInterval = null;
+    const forecastDates = [];  // Array to hold date strings from API response
+ 
+    // After fetching forecast data:
+    function setupTimeLapseDates(dailyInfo) {
+      forecastDates.length = 0;
+      dailyInfo.forEach(day => {
+        const dateStr = `${day.date.year}-${String(day.date.month).padStart(2, '0')}-${String(day.date.day).padStart(2, '0')}`;
+        forecastDates.push(dateStr);
+      });
     }
-
-    // repeat across x-axis
-    if (x < 0 || x >= tileRange) {
-      x = ((x % tileRange) + tileRange) % tileRange;
+ 
+    // Time lapse playback
+    function startTimeLapse() {
+      if (timeLapseInterval) clearInterval(timeLapseInterval);
+      timeLapseIndex = 0;
+      timeLapseInterval = setInterval(() => {
+        // Update pollen overlay with forecastDates[timeLapseIndex]
+        updateOverlayForDate(forecastDates[timeLapseIndex]);
+        timeLapseIndex++;
+        if (timeLapseIndex >= forecastDates.length) {
+          clearInterval(timeLapseInterval);
+        }
+      }, 2000);  // 2 seconds per frame
     }
-    return { x: x, y: y };
-  }
-
-  let pollen = "TREE_UPI"
-  class PollenMapType {
-    tileSize;
-    alt = null;
-    maxZoom = 16;
-    minZoom = 3;
-    name = null;
-    projection = null;
-    radius = 6378137;
-    constructor(tileSize) {
-      this.tileSize = tileSize;
+ 
+    function updateOverlayForDate(dateStr) {
+      // If API supports date-specific tile overlays:
+      // pollen = `TREE_UPI_${dateStr}`; or so
+      // Otherwise, update map or UI to reflect forecast data for dateStr
+ 
+      // Then update overlay:
+      updatePollenOverlay();
     }
-
-    getTile(coord, zoom, ownerDocument) {
-      const img = ownerDocument.createElement("img");
-      const mapType = pollen;
-      const normalizedCoord = getNormalizedCoord(coord, zoom);
-
-      const x = coord.x;
+ 
+    let map;
+    let geocoder;
+ 
+    function getNormalizedCoord(coord, zoom) {
       const y = coord.y;
-      const key = "AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ";
-      img.style.opacity = 0.8;
-      img.src = `https://pollen.googleapis.com/v1/mapTypes/${mapType}/heatmapTiles/${zoom}/${x}/${y}?key=${key}`;
-      return img;
+      let x = coord.x;
+      // Define the tile range in one direction. The range is dependent on zoom level:
+      // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc.
+      const tileRange = 1 << zoom;
+ 
+      // don't repeat across y-axis (vertically)
+      if (y < 0 || y >= tileRange) {
+        return null;
+      }
+ 
+      // repeat across x-axis
+      if (x < 0 || x >= tileRange) {
+        x = ((x % tileRange) + tileRange) % tileRange;
+      }
+      return { x: x, y: y };
     }
-    releaseTile(tile) {}
+ 
+    let pollen = "TREE_UPI"
+    class PollenMapType {
+ 
+      tileSize;
+      alt = null;
+      maxZoom = 16;
+      minZoom = 3;
+      name = null;
+      projection = null;
+      radius = 6378137;
+      constructor(tileSize) {
+        this.tileSize = tileSize;
+      }
+ 
+      getTile(coord, zoom, ownerDocument) {
+        const img = ownerDocument.createElement("img");
+        const mapType = pollen;
+        const normalizedCoord = getNormalizedCoord(coord, zoom);
+ 
+        const x = coord.x;
+        const y = coord.y;
+        const key = "AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ";
+        img.style.opacity = 0.8;
+        img.src = `https://pollen.googleapis.com/v1/mapTypes/${mapType}/heatmapTiles/${zoom}/${x}/${y}?key=${key}`;
+        return img;
+      }
+      releaseTile(tile) { }
+    }
+ 
+ 
+    function initMap() {
+ 
+      geocoder = new google.maps.Geocoder();
+ 
+      document.getElementById('searchBtn').addEventListener('click', async () => {
+        const address = document.getElementById('locationInput').value;
+        const inputDate = document.getElementById('dateInput').value;
+        if (!address) {
+          alert('Please enter a location');
+          return;
+        }
+        if (!inputDate) {
+          alert('Please select a date');
+          return;
+        }
+ 
+        geocoder.geocode({ address: address }, async (results, status) => {
+          if (status === 'OK' && results[0]) {
+            const location = results[0].geometry.location;
+            // Center map on location
+            map.setCenter(location);
+            map.setZoom(8);
+ 
+            // Fetch 5-day pollen forecast
+            const apiKey = 'AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ';
+            const url = `https://pollen.googleapis.com/v1/forecast:lookup?key=${apiKey}&location.latitude=${location.lat()}&location.longitude=${location.lng()}&days=5`;
+            try {
+              const response = await fetch(url);
+              const data = await response.json();
+ 
+              // Find forecast matching the input date
+              const forecast = data.dailyInfo.find(day => {
+                const dayStr = `${day.date.year.toString().padStart(4, '0')}-${day.date.month.toString().padStart(2, '0')}-${day.date.day.toString().padStart(2, '0')}`;
+                return dayStr === inputDate;
+              });
+ 
+              if (forecast) {
+                // Create a readable message showing pollen types and health info
+                const message = forecast.pollenTypeInfo.map(p =>
+                  `${p.displayName}: ${p.indexInfo.category} - ${p.healthRecommendations.join(' ')}`
+                ).join('\n');
+                alert(`Pollen forecast for ${address} on ${inputDate}:\n\n${message}`);
+              } else {
+                alert('No pollen data available for the selected date.');
+              }
+            } catch (error) {
+              alert('Error fetching pollen data: ' + error.message);
+            }
+          } else {
+            alert('Location not found: ' + status);
+          }
+        });
+      });
+ 
+ 
+      //map creation
+      const myLatLng = { lat: 39.8283, lng: -98.5795 };
+ 
+      map = new google.maps.Map(document.getElementById("map"), {
+        mapId: "4cd92f36fb2ff143b1b66208",
+        zoom: 3,
+        center: myLatLng,
+        maxZoom: 16,
+        minZoom: 3,
+        //this restricts the view to a singular area
+ 
+        // restriction: {
+        //   latLngBounds: { north: 50, south: 24, west: -125, east: -66 },
+        //   strictBounds: true,
+        // },
+        streetViewControl: false,
+      });
+ 
+      pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
+      map.overlayMapTypes.insertAt(0, pollenMapType);
+      // Button listeners to change pollen type overlays
+      document.querySelector("#tree").addEventListener("click", () => {
+        pollen = "TREE_UPI";
+        updatePollenOverlay();
+      });
+      document.querySelector("#grass").addEventListener("click", () => {
+        pollen = "GRASS_UPI";
+        updatePollenOverlay();
+      });
+      document.querySelector("#weed").addEventListener("click", () => {
+        pollen = "WEED_UPI";
+        updatePollenOverlay();
+      });
+    }
+ 
+    function updatePollenOverlay() {
+      map.overlayMapTypes.removeAt(0);
+      pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
+      map.overlayMapTypes.insertAt(0, pollenMapType);
+    }
+ 
+    function geocodeAddress(address) {
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          const location = results[0].geometry.location;
+          // Center the map on searched location
+          map.setCenter(location);
+          map.setZoom(4); // Zoom in to a reasonable level
+ 
+          // Optional: Update pollen overlay or other map features here
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+  if (!timeLapseInterval) {
+    startTimeLapse();
   }
+});
 
-function initMap() {
-  const myLatLng = { lat: 39.8283, lng: -98.5795 }; 
+document.getElementById('pauseBtn').addEventListener('click', () => {
+  if (timeLapseInterval) {
+    clearInterval(timeLapseInterval);
+    timeLapseInterval = null;
+  }
+});
 
-  map = new google.maps.Map(document.getElementById("map"), {
-    mapId: "4cd92f36fb2ff143b1b66208",
-    zoom: 3,
-    center: myLatLng,
-    maxZoom: 16,
-    minZoom: 3,
-    restriction: {
-      latLngBounds: { north: 50, south: 24, west: -125, east: -66 },
-      strictBounds: true,
-    },
-    streetViewControl: false,
-  });
-
-  pollenMapType = new PollenMapType(new google.maps.Size(256, 256)); // <-- move here
-  map.overlayMapTypes.insertAt(0, pollenMapType);
-
-  document.querySelector("#tree").addEventListener("click", function(){
-    pollen ="TREE_UPI"
-    map.overlayMapTypes.removeAt(0);
-    const pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
-    map.overlayMapTypes.insertAt(0, pollenMapType);
-  });
-  document.querySelector("#grass").addEventListener("click", function(){
-    pollen ="GRASS_UPI"
-    map.overlayMapTypes.removeAt(0);
-    const pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
-    map.overlayMapTypes.insertAt(0, pollenMapType);
-  });
-  document.querySelector("#weed").addEventListener("click", function(){
-    pollen ="WEED_UPI"
-    map.overlayMapTypes.removeAt(0);
-    const pollenMapType = new PollenMapType(new google.maps.Size(256, 256));
-    map.overlayMapTypes.insertAt(0, pollenMapType);
-  });
+// Modify startTimeLapse to resume from current index
+function startTimeLapse() {
+  if (timeLapseInterval) clearInterval(timeLapseInterval);
+  // If timeLapseIndex is at the end, reset to 0 to loop or stop
+  if (timeLapseIndex >= forecastDates.length) {
+    timeLapseIndex = 0;
+  }
+  timeLapseInterval = setInterval(() => {
+    updateOverlayForDate(forecastDates[timeLapseIndex]);
+    timeLapseIndex++;
+    if (timeLapseIndex >= forecastDates.length) {
+      clearInterval(timeLapseInterval);
+      timeLapseInterval = null;
+      // Optionally reset timeLapseIndex here to loop
+    }
+  }, 2000);
 }
 
+ 
   </script>
+
   <script
-    src="https://maps.googleapis.com/maps/api/js?callback=initMap&v=weekly&key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&language=en" defer>
-  </script>
-  </body>
+    src="https://maps.googleapis.com/maps/api/js?callback=initMap&v=weekly&key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&language=en"
+    defer>
+    </script>
+</body>
+
 </html>
