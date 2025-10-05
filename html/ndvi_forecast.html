@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    _250m_16_days_NDVI (MOD13Q1.061)
+ 
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #EDE6D6 0%, #f5f0e6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #18392B;
+            font-size: 2.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        #map {
+            height: 500px;
+            width: calc(50% - 10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            overflow: hidden;
+            border: 3px solid #18392B;
+        }
+
+        #chart {
+            height: 500px;
+            width: calc(50% - 10px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            padding: 40px 60px 60px 80px;
+            border: 3px solid #18392B;
+        }
+
+        .nasa-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+            z-index: 1000;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 600px;
+            border: 2px solid #18392B;
+        }
+
+        .controls label {
+            font-weight: 600;
+            color: #18392B;
+            font-size: 1.1em;
+            margin-right: 15px;
+        }
+
+        #dateSlider {
+            width: 300px;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #18392B, #4a5bb8);
+            cursor: pointer;
+        }
+
+        #dateSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #18392B;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        #dateSlider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        #selectedDate {
+            display: inline-block;
+            margin-left: 15px;
+            font-weight: 700;
+            color: #18392B;
+            font-size: 1.1em;
+            background: #EDE6D6;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .legend {
+            margin: 20px auto;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .legend div {
+            display: inline-block;
+            margin: 10px 20px;
+            font-weight: 500;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .tips {
+            margin: 20px auto;
+            font-size: 15px;
+            background: white;
+            padding: 25px 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .tips b {
+            color: #18392B;
+            font-size: 1.2em;
+        }
+
+        .tips ul {
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        .tips li {
+            margin-bottom: 15px;
+        }
+
+        .tips li b {
+            font-size: 1em;
+        }
+
+        .risk-high {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .risk-moderate {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .bar {
+            display: inline-block;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .bar div {
+            width: 50px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s;
+        }
+
+        .bar:hover div {
+            transform: scale(1.05);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            font-weight: 600;
+            color: #18392B;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            color: #18392B;
+            font-weight: 700;
+            font-size: 0.95em;
+            width: 100%;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: #18392B;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 20px;
+            height: 360px;
+            width: 50px;
+            text-align: right;
+            color: #18392B;
+            font-weight: 600;
+            padding-right: 10px;
+        }
+
+        .y-axis div {
+            margin-bottom: 62px;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            #map,
+            #chart {
+                width: 100%;
+                height: 350px;
+                margin-bottom: 20px;
+            }
+
+            .y-axis div {
+                margin-bottom: 44px;
+            }
+
+            #dateSlider {
+                width: 200px;
+            }
+
+            .legend div {
+                margin: 5px 10px;
+                font-size: 0.9em;
+            }
+
+            .nasa-logo {
+                width: 70px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>NASA Earth Data Pollen Forecast</h1>
+    <img src="https://www.nasa.gov/wp-content/uploads/2023/03/nasa-logo-web-rgb.png" class="nasa-logo"
+        alt="NASA Logo" />
+    <div class="controls">
+        <label for="dateSlider">Select Date: </label>
+        <input type="range" id="dateSlider" min="0" max="19" value="0">
+        <span id="selectedDate"></span>
+    </div>
+    <div class="legend">
+        <div><span style="color:#dc2626; font-size: 1.5em;">■</span> High Risk (>4)</div>
+        <div><span style="color:#f59e0b; font-size: 1.5em;">■</span> Moderate Risk (>2)</div>
+        <div><span style="color:#16a34a; font-size: 1.5em;">■</span> Low Risk (≤2)</div>
+        <div><span style="color:#2563eb; font-size: 1.5em;">■</span> Combined Index</div>
+    </div>
+    <div class="container">
+        <div id="map"></div>
+        <div id="chart">
+            <div class="y-axis">
+                <div>5</div>
+                <div>4</div>
+                <div>3</div>
+                <div>2</div>
+                <div>1</div>
+                <!-- <div>0</div> -->
+            </div>
+        </div>
+       
+    </div>
+    <div class="tips">
+        <b>Hay Fever Management Guide:</b>
+        <ul>
+            <li><b class="risk-high">High Risk (>4):</b> Stay indoors when possible, especially during peak pollen hours (5am-10am). Take prescribed antihistamines before symptoms start. Keep all windows and doors closed. Use air conditioning with HEPA filters. Shower and change clothes after being outside. Wear wraparound sunglasses to protect eyes.</li>
+            <li><b class="risk-moderate">Moderate Risk (2-4):</b> Monitor your symptoms closely and take antihistamines if needed. Limit outdoor activities during early morning and evening. Check pollen counts before planning outdoor activities. Keep car windows closed while driving. Consider wearing a mask outdoors if sensitive.</li>
+            <li><b class="risk-low">Low Risk (≤2):</b> Safe for most outdoor activities. Minimal precautions needed, but those highly sensitive should still be cautious. Good time for exercise and outdoor recreation. Consider opening windows for fresh air.</li>
+        </ul>
+    </div>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap"></script>
+    <script>
+        let map, allForecasts = [];
+        const slider = document.getElementById('dateSlider');
+        const dateLabel = document.getElementById('selectedDate');
+        const chart = document.getElementById('chart');
+
+        function getRiskLevel(index) {
+            return index > 4 ? 'High Risk' : index > 2 ? 'Moderate Risk' : 'Low Risk';
+        }
+
+        function getMarkerIcon(color) {
+            return `https://maps.google.com/mapfiles/ms/icons/${color}-dot.png`;
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 32.7767, lng: -96.7970 },
+                zoom: 10,
+                mapTypeControl: false,
+                attributionControl: false
+            });
+            const attribution = document.createElement('div');
+            attribution.innerHTML = 'Data &copy; NASA MODIS';
+            attribution.style.fontSize = '10px';
+            attribution.style.padding = '2px';
+            map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(attribution);
+
+            fetch('/data/predicted_pollen_20days.json')
+                .then(response => response.json())
+                .then(forecasts => {
+                    allForecasts = forecasts;
+                    const uniqueDates = [...new Set(forecasts.map(d => d.date))];
+                    slider.max = uniqueDates.length - 1;
+                    dateLabel.textContent = uniqueDates[0];
+
+                    function updateDisplay(index) {
+                        const date = uniqueDates[index];
+                        dateLabel.textContent = date;
+
+                        // Clear existing markers
+                        map.markers = map.markers || [];
+                        map.markers.forEach(marker => marker.setMap(null));
+                        map.markers = [];
+
+                        // Add marker
+                        const entries = allForecasts.filter(d => d.date === date);
+                        const maxIndex = Math.max(...entries.map(e => e.projected_index));
+                        const color = maxIndex > 4 ? 'red' : maxIndex > 2 ? 'orange' : 'green';
+                        let content = `<div style="font-family: 'Segoe UI', Arial, sans-serif; padding: 5px;">
+                            <b style="color: #18392B; font-size: 16px;">${date} - Pollen Forecast</b><br><br>`;
+                        
+                        entries.forEach(e => {
+                            const riskColor = e.projected_index > 4 ? '#dc2626' : e.projected_index > 2 ? '#f59e0b' : '#16a34a';
+                            const riskLevel = getRiskLevel(e.projected_index);
+                            content += `<div style="margin: 8px 0; padding: 8px; background: #f9fafb; border-radius: 6px; border-left: 4px solid ${riskColor};">
+                                <b style="color: ${riskColor};">${e.pollen_type}:</b> Index ${e.projected_index.toFixed(1)} - ${riskLevel}<br>
+                                <small style="color: #6b7280;">NASA Vegetation: ${e.ndvi_influence}</small>
+                            </div>`;
+                        });
+                        
+                        const highRisk = entries.some(e => e.projected_index > 4);
+                        const modRisk = entries.some(e => e.projected_index > 2);
+                        const tipColor = highRisk ? '#dc2626' : modRisk ? '#f59e0b' : '#16a34a';
+                        let tipText = highRisk ? 
+                            '⚠️ Stay indoors, take antihistamines, keep windows closed' : 
+                            modRisk ? 
+                            '⚡ Monitor symptoms, limit outdoor time during peak hours' : 
+                            '✓ Safe for outdoor activities, minimal precautions needed';
+                        
+                        content += `<div style="margin-top: 12px; padding: 10px; background: ${tipColor}15; border-radius: 6px; border: 2px solid ${tipColor};">
+                            <b style="color: ${tipColor};">Recommendation:</b><br>
+                            <span style="color: #374151;">${tipText}</span>
+                        </div></div>`;
+                        
+                        const infoWindow = new google.maps.InfoWindow({ content });
+                        const marker = new google.maps.Marker({
+                            position: { lat: 32.7767, lng: -96.7970 },
+                            map,
+                            icon: getMarkerIcon(color)
+                        });
+                        marker.addListener('click', () => infoWindow.open(map, marker));
+                        map.markers.push(marker);
+
+                        // Update bar chart
+                        chart.innerHTML = '<div class="y-axis"><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div></div>';
+                        const types = ['TREE', 'GRASS', 'WEED', 'COMBINED'];
+                        const colors = { 
+                            TREE: '#16a34a',      // Green - Low risk
+                            GRASS: '#f59e0b',     // Orange - Moderate risk  
+                            WEED: '#dc2626',      // Red - High risk
+                            COMBINED: '#2563eb'   // Blue - Combined index
+                        };
+                        types.forEach(type => {
+                            const bar = document.createElement('div');
+                            bar.className = 'bar';
+                            const entry = entries.find(d => d.pollen_type === type);
+                            const value = entry.projected_index;
+                            const riskLevel = getRiskLevel(value);
+                            const tooltipText = `${type}: Index ${value.toFixed(2)} (${riskLevel})`;
+                            
+                            const height = (value / 5) * 360; // Scale to chart height
+                            bar.innerHTML = `<div style="background:${colors[type]};height:${height}px;"></div>
+                                            <div class="bar-label">${type}</div>
+                                            <div class="bar-value">${value.toFixed(1)}</div>
+                                            <div class="tooltip">${tooltipText}</div>`;
+                            chart.appendChild(bar);
+                        });
+
+                        // Add tooltips
+                        document.querySelectorAll('.bar').forEach(bar => {
+                            const tooltip = bar.querySelector('.tooltip');
+                            bar.addEventListener('mouseenter', () => {
+                                tooltip.style.display = 'block';
+                                tooltip.style.top = `${bar.querySelector('div').offsetHeight - 30}px`;
+                                tooltip.style.left = '50%';
+                                tooltip.style.transform = 'translateX(-50%)';
+                            });
+                            bar.addEventListener('mouseleave', () => {
+                                tooltip.style.display = 'none';
+                            });
+                        });
+
+                        // Highlight high weed index
+                        const highWeed = entries.find(d => d.date === '2026-04-10' && d.pollen_type === 'WEED');
+                        if (highWeed && date === highWeed.date) {
+                            const note = document.createElement('div');
+                            note.style.position = 'absolute';
+                            note.style.top = '10px';
+                            note.style.left = '50%';
+                            note.style.transform = 'translateX(-50%)';
+                            note.style.color = 'red';
+                            note.style.fontWeight = "bold";
+                            note.textContent = 'High Weed Risk (NDVI 0.333)';
+                            chart.appendChild(note);
+                        }
+                    }
+
+                    slider.addEventListener('input', () => updateDisplay(slider.value));
+                    updateDisplay(0);
+                })
+                .catch(error => console.error('Error loading JSON:', error));
+        }
+    </script>
+</body>
+
+</html>
