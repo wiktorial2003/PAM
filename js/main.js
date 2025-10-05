@@ -37,7 +37,7 @@ class PollenMapType {
     const x = normalizedCoord.x;
     const y = normalizedCoord.y;
 
-    const key = "AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ";
+    const key = "AIzaSyDof8QDt0_6EghBjqAucP4nnlKqN8cG5y0";
 
     img.style.opacity = 0.4;
     img.src = `https://pollen.googleapis.com/v1/mapTypes/${mapType}/heatmapTiles/${zoom}/${x}/${y}?key=${key}`;
@@ -210,7 +210,7 @@ function initMap() {
       map.setCenter(location);
       map.setZoom(8);
 
-      const apiKey = "AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ";
+      const apiKey = "AIzaSyDof8QDt0_6EghBjqAucP4nnlKqN8cG5y0";
       const url = `https://pollen.googleapis.com/v1/forecast:lookup?key=${apiKey}&location.latitude=${location.lat()}&location.longitude=${location.lng()}&days=5`;
 
       try {
