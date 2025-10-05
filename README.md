@@ -16,5 +16,7 @@ References
 - https://www.ncei.noaa.gov/products/pollen
 - https://www.climatecentral.org/news/report-longer-growing-season-longer-allergy-season-2025
 - https://www.cbsnews.com/news/allergy-map-2025-us-cities-spring-allergies/
+- https://www.perplexity.ai/
+- https://chat.openai.com/
 
 
