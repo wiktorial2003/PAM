@@ -1,43 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA-Powered Pollen Forecast for Hay Fever</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; }
-        h1 { text-align: center; margin: 10px; }
-        .container { display: flex; flex-wrap: wrap; }
-        #map { height: 400px; width: 50%; }
-        #chart { height: 400px; width: 50%; display: flex; justify-content: center; align-items: flex-end; position: relative; }
-        .nasa-logo { position: absolute; top: 10px; right: 10px; width: 100px; }
-        .controls { text-align: center; margin: 10px; }
-        .legend { margin: 10px; }
-        .legend div { display: inline-block; margin-right: 20px; }
-        .tips { margin: 10px; font-size: 14px; }
-        .bar { display: inline-block; margin: 0 10px; position: relative; }
-        .bar div { width: 40px; text-align: center; }
-        .bar-label { position: absolute; bottom: -20px; }
-        .bar-value { position: absolute; top: -20px; color: black; }
-        .tooltip { position: absolute; background: rgba(0,0,0,0.8); color: white; padding: 5px; border-radius: 3px; display: none; }
-        .y-axis { position: absolute; left: 0; height: 360px; width: 40px; text-align: right; }
-        .y-axis div { margin-bottom: 62px; }
+        <!-- <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #EDE6D6 0%, #f5f0e6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #18392B;
+            font-size: 2.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        #map {
+            height: 500px;
+            width: calc(50% - 10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            overflow: hidden;
+            border: 3px solid #18392B;
+        }
+
+        #chart {
+            height: 500px;
+            width: calc(50% - 10px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            padding: 40px 20px 60px 60px;
+            border: 3px solid #18392B;
+        }
+
+        .nasa-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+            z-index: 1000;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 600px;
+            border: 2px solid #18392B;
+        }
+
+        .controls label {
+            font-weight: 600;
+            color: #18392B;
+            font-size: 1.1em;
+            margin-right: 15px;
+        }
+
+        #dateSlider {
+            width: 300px;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #18392B, #4a5bb8);
+            cursor: pointer;
+        }
+
+        #dateSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #18392B;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        #dateSlider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        #selectedDate {
+            display: inline-block;
+            margin-left: 15px;
+            font-weight: 700;
+            color: #18392B;
+            font-size: 1.1em;
+            background: #EDE6D6;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .legend {
+            margin: 20px auto;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .legend div {
+            display: inline-block;
+            margin: 10px 20px;
+            font-weight: 500;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .tips {
+            margin: 20px auto;
+            font-size: 15px;
+            background: white;
+            padding: 25px 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .tips b {
+            color: #18392B;
+            font-size: 1.2em;
+        }
+
+        .tips ul {
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        .tips li {
+            margin-bottom: 10px;
+        }
+
+        .bar {
+            display: inline-block;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .bar div {
+            width: 50px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s;
+        }
+
+        .bar:hover div {
+            transform: scale(1.05);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            font-weight: 600;
+            color: #18392B;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            color: #18392B;
+            font-weight: 700;
+            font-size: 0.95em;
+            width: 100%;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: #18392B;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 15px;
+            height: 360px;
+            width: 40px;
+            text-align: right;
+            color: #18392B;
+            font-weight: 600;
+        }
+
+        .y-axis div {
+            margin-bottom: 62px;
+        }
+
         @media (max-width: 800px) {
-            #map, #chart { width: 100%; height: 300px; }
-            .y-axis div { margin-bottom: 44px; }
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            #map,
+            #chart {
+                width: 100%;
+                height: 350px;
+                margin-bottom: 20px;
+            }
+
+            .y-axis div {
+                margin-bottom: 44px;
+            }
+
+            #dateSlider {
+                width: 200px;
+            }
+
+            .legend div {
+                margin: 5px 10px;
+                font-size: 0.9em;
+            }
+
+            .nasa-logo {
+                width: 70px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style> -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #EDE6D6 0%, #f5f0e6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #18392B;
+            font-size: 2.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        #map {
+            height: 500px;
+            width: calc(50% - 10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            overflow: hidden;
+            border: 3px solid #18392B;
+        }
+
+        #chart {
+            height: 500px;
+            width: calc(50% - 10px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(24, 35, 146, 0.15);
+            padding: 40px 60px 60px 80px;
+            border: 3px solid #18392B;
+        }
+
+        .nasa-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+            z-index: 1000;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 600px;
+            border: 2px solid #18392B;
+        }
+
+        .controls label {
+            font-weight: 600;
+            color: #18392B;
+            font-size: 1.1em;
+            margin-right: 15px;
+        }
+
+        #dateSlider {
+            width: 300px;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #18392B, #4a5bb8);
+            cursor: pointer;
+        }
+
+        #dateSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #18392B;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        #dateSlider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        #selectedDate {
+            display: inline-block;
+            margin-left: 15px;
+            font-weight: 700;
+            color: #18392B;
+            font-size: 1.1em;
+            background: #EDE6D6;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .legend {
+            margin: 20px auto;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .legend div {
+            display: inline-block;
+            margin: 10px 20px;
+            font-weight: 500;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .tips {
+            margin: 20px auto;
+            font-size: 15px;
+            background: white;
+            padding: 25px 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(24, 35, 146, 0.1);
+            max-width: 1400px;
+            border: 2px solid #18392B;
+        }
+
+        .tips b {
+            color: #18392B;
+            font-size: 1.2em;
+        }
+
+        .tips ul {
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        .tips li {
+            margin-bottom: 15px;
+        }
+
+        .tips li b {
+            font-size: 1em;
+        }
+
+        .risk-high {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .risk-moderate {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .bar {
+            display: inline-block;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .bar div {
+            width: 50px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s;
+        }
+
+        .bar:hover div {
+            transform: scale(1.05);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            font-weight: 600;
+            color: #18392B;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            color: #18392B;
+            font-weight: 700;
+            font-size: 0.95em;
+            width: 100%;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: #18392B;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 20px;
+            height: 360px;
+            width: 50px;
+            text-align: right;
+            color: #18392B;
+            font-weight: 600;
+            padding-right: 10px;
+        }
+
+        .y-axis div {
+            margin-bottom: 62px;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            #map,
+            #chart {
+                width: 100%;
+                height: 350px;
+                margin-bottom: 20px;
+            }
+
+            .y-axis div {
+                margin-bottom: 44px;
+            }
+
+            #dateSlider {
+                width: 200px;
+            }
+
+            .legend div {
+                margin: 5px 10px;
+                font-size: 0.9em;
+            }
+
+            .nasa-logo {
+                width: 70px;
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
+
 </head>
+
 <body>
     <h1>NASA-Powered Pollen Forecast for Hay Fever</h1>
-    <img src="https://www.nasa.gov/wp-content/uploads/2023/03/nasa-logo-web-rgb.png" class="nasa-logo" alt="NASA Logo"/>
+    <img src="https://www.nasa.gov/wp-content/uploads/2023/03/nasa-logo-web-rgb.png" class="nasa-logo"
+        alt="NASA Logo" />
     <div class="controls">
         <label for="dateSlider">Select Date: </label>
         <input type="range" id="dateSlider" min="0" max="19" value="0">
         <span id="selectedDate"></span>
     </div>
     <div class="legend">
-        <div><span style="color:red">■</span> High Risk (>4)</div>
+        <div><span style="color:rgb(0, 255, 21)">■</span> High Risk (>4)</div>
         <div><span style="color:yellow">■</span> Moderate Risk (>2)</div>
         <div><span style="color:green">■</span> Low Risk (≤2)</div>
         <div><span style="color:blue">■</span> Combined Index</div>
@@ -47,8 +565,18 @@
         <div id="map"></div>
         <div id="chart">
             <div class="y-axis">
-                <div>5</div><div>4</div><div>3</div><div>2</div><div>1</div><div>0</div>
+                <div>5</div>
+                <div>4</div>
+                <div>3</div>
+                <div>2</div>
+                <div>1</div>
+                <div>0</div>
             </div>
+        </div>
+        <div class="controls" style="margin-top: 10%;">
+            <label for="dateSlider">Select Date: </label>
+            <input type="range" id="dateSlider" min="0" max="19" value="0">
+            <span id="selectedDate"></span>
         </div>
     </div>
     <div class="tips">
@@ -59,7 +587,8 @@
             <li><b>Low Risk (≤2):</b> Safe for outdoor activities, minimal precautions needed.</li>
         </ul>
     </div>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1vaGauNRgZ8uF5e0WjVgYopOe72avdQ&callback=initMap"></script>
     <script>
         let map, allForecasts = [];
         const slider = document.getElementById('dateSlider');
@@ -127,7 +656,7 @@
                         chart.innerHTML = '<div class="y-axis"><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div><div>0</div></div>';
                         // const types = ['TREE', 'GRASS', 'WEED', 'COMBINED', 'NDVI'];
                         const types = ['TREE', 'GRASS', 'WEED', 'COMBINED'];
-                        const colors = { TREE: 'green', GRASS: 'yellow', WEED: 'red', COMBINED: 'blue'};
+                        const colors = { TREE: 'green', GRASS: 'yellow', WEED: 'red', COMBINED: 'blue' };
                         types.forEach(type => {
                             const bar = document.createElement('div');
                             bar.className = 'bar';
@@ -183,4 +712,5 @@
         }
     </script>
 </body>
+
 </html>
