@@ -1,0 +1,462 @@
+ body {
+     margin: 0;
+     padding: 0;
+     overflow-x: hidden;
+     background: #EDE6D6;
+ }
+
+ nav {
+     width: auto;
+     background: #18392B;
+     padding: 1rem 0;
+     position: relative;
+ }
+
+ .logo {
+     position: absolute;
+     left: 1rem;
+     top: 50%;
+     transform: translateY(-50%);
+     height: 50px;
+     width: auto;
+ }
+
+ nav ul {
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     display: flex;
+     justify-content: center;
+     gap: 2rem;
+ }
+
+ nav a {
+     color: #F5F5DC;
+     text-decoration: none;
+     padding: 0.5rem 1rem;
+ }
+
+ nav a:hover {
+     background: #7A8471;
+ }
+
+.hero {
+  position: relative;
+  height: 100vh;         /* full screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #EDE6D6;   /* fallback color */
+}
+
+.hero-text h1 {
+  font-size: 3.5rem; /* was ~3rem, now ~20% bigger */
+}
+
+.hero-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* makes it fill entire hero */
+  opacity: 0.5;          /* faint, watermark effect */
+  top: 0;
+  left: 0;
+}
+
+.hero-text {
+  text-align: center;
+  color: #000000;
+}
+
+.timeline {
+    position: relative;
+    z-index: 1; /* above the background */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 6rem 1rem; /* more top padding to avoid overlapping hero */
+}
+
+/* Vertical timeline line */
+.timeline:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #18392B;
+    transform: translateX(-50%);
+    z-index: 0; /* line stays behind the cards */
+}
+
+.timeline-card {
+    position: relative;
+    z-index: 1; /* cards appear above the line */
+    background: #18392B;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px; /* adjust height as needed */
+    margin-top: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#map {
+    width: 80%;          /* Or 100% if you want it full-screen width */
+    max-width: 800px;    /* Optional: keeps it from stretching too much on large screens */
+    height: 500px;       /* Controls vertical size */
+    margin: 2rem auto;   /* Centers the map below the timeline */
+    border-radius: 10px; /* Optional styling */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.map-btn {
+    position: absolute;
+    top: 60px;       /* adjust vertical position */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #df600b;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.map-btn:hover {
+    background-color: rgb(223, 177, 52);
+}
+
+
+
+.timeline-card {
+    background: #a9b69e;
+    color: #fff;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    max-width: 800px;
+    text-align: center;
+}
+
+
+ .container {
+     position: center;
+     width: 50%;
+ }
+
+
+ .container img {
+     width: 100%;
+     height: auto;
+ }
+
+ .bird{
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg');
+    filter: invert(34%) sepia(55%) saturate(427%) hue-rotate(141deg) brightness(93%) contrast(91%);
+    background-size: auto 100%;
+    width: 88px;
+    height: 125px;
+    will-change: background-position;
+
+    animation-name: fly-cycle;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+}
+
+.bird-one{
+    animation-duration: 1s;
+    animation-delay: -0.5s;
+
+}
+.bird-two{ 
+  animation-duration: 0.9s; 
+  animation-delay: -0.75s; 
+}
+.bird-three{
+    animation-duration:1.25s;
+    animation-delay: -0.25s
+
+}
+.bird-four{
+    animation-duration: 1.1s;
+    animation-delay: -0.5s;
+}
+
+.bird-container {
+	position: absolute;
+	top: 10%;
+  left: -3%;
+	transform: scale(0) translateX(-10vw);
+	will-change: transform;
+	
+	animation-name: fly-right-one;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+	
+.bird-container-one{
+	animation-duration: 15s;
+	animation-delay: 0;
+}
+	
+.bird-container-two{
+	animation-duration: 16s;
+	animation-delay: 1s;
+}
+	
+.bird-container-three{
+	animation-duration: 14.6s;
+	animation-delay: 9.5s;
+}
+	
+.bird-container-four {
+		animation-duration: 16s;
+		animation-delay: 10.25s;
+}
+/* @keyframes fly-cycle {
+    100%{
+        background-position: -3600px 0;
+    }
+} */
+@keyframes fly-cycle {
+	
+	100% {
+		background-position: -900px 0;
+	}
+	
+}
+
+@keyframes fly-right-one {
+	
+	0% {
+		transform: scale(0.3) translateX(-80vw);
+	}
+	
+	10% {
+		transform: translateY(2vh) translateX(10vw) scale(0.4);
+	}
+	
+	20% {
+		transform: translateY(0vh) translateX(30vw) scale(0.5);
+	}
+	
+	30% {
+		transform: translateY(4vh) translateX(50vw) scale(0.6);
+	}
+	
+	40% {
+		transform: translateY(2vh) translateX(70vw) scale(0.6);
+	}
+	
+	50% {
+		transform: translateY(0vh) translateX(90vw) scale(0.6);
+	}
+	
+	60% {
+		transform: translateY(0vh) translateX(110vw) scale(0.6);
+	}
+	
+	100% {
+		transform: translateY(0vh) translateX(110vw) scale(0.6);
+	}
+	
+}
+
+@keyframes fly-right-two {
+	
+	0% {
+		transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+	}
+	
+	10% {
+		transform: translateY(0vh) translateX(10vw) scale(0.4);
+	}
+	
+	20% {
+		transform: translateY(-4vh) translateX(30vw) scale(0.6);
+	}
+	
+	30% {
+		transform: translateY(1vh) translateX(50vw) scale(0.45);
+	}
+	
+	40% {
+		transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+	}
+	
+	50% {
+		transform: translateY(0vh) translateX(90vw) scale(0.45);
+	}
+	
+	51% {
+		transform: translateY(0vh) translateX(110vw) scale(0.45);
+	}
+	
+	100% {
+		transform: translateY(0vh) translateX(110vw) scale(0.45);
+	}
+	
+}
+
+ /* .container .btn {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     -ms-transform: translate(-50%, -50%);
+     background-color: #df600b;
+     color: white;
+     font-size: 16px;
+     padding: 12px 24px;
+     border: none;
+     cursor: pointer;
+     border-radius: 5px;
+ }
+
+ .container .btn:hover {
+     background-color: rgb(223, 177, 52);
+ } */
+
+
+ /* h1 {
+     text-align: center;
+     margin: 2rem 0;
+     color: #2F4F2F;
+ }
+
+ .intro-panel {
+     background: #9CAF88;
+     color: #fafafa;
+     padding: 2rem;
+     margin: 2rem 0;
+     border-radius: 10px;
+     width: 80%;
+     max-width: 800px;
+     text-align: center;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s ease;
+ }
+
+ .intro-panel:hover {
+     background: #7A8471;
+     transform: translateY(-5px);
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+ }
+
+ .intro-panel h2 {
+     font-size: 2.5rem;
+     margin: 0 0 1rem 0;
+     color: #F5F5DC;
+ }
+
+ .intro-panel p {
+     font-size: 1.2rem;
+     margin: 0;
+ }
+
+ #map {
+     height: 500px;
+     width: 80%;
+     max-width: 800px;
+ }
+
+
+ body,
+ html {
+     margin: 0;
+     height: 100%;
+     overflow-x: hidden;
+ }
+
+ #vanta-bg {
+     width: 100vw;
+     height: 100vh;
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: -1;
+ }
+
+
+ .content {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     color: white;
+     text-align: center;
+     font-family: sans-serif;
+ }
+
+ .preview {
+     background: #a9b69e;
+     text-align: center;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s ease;
+
+     border-radius: 10px;
+ }
+
+
+ 
+
+ .column {
+     float: left;
+     width: 50%;
+ }
+
+
+ .row:after {
+     content: "";
+     display: table;
+     clear: both;
+ }
+
+ .bottomofpage img {
+     width: 100%;
+     height: auto;
+     max-width: 600px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+     transition: all 0.3s ease;
+     border-radius: 10px;
+
+ }
+
+ .bottomofpage img:hover {
+     transform: scale(1.05);
+     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+ }
+
+
+ .preview {
+     margin-bottom: 2rem;
+ }
+
+
+ .bottomofpage {
+     margin-top: 2rem;
+     text-align: center;
+
+ }
+
+ .column img {
+     max-width: 100%;
+     height: auto;
+ }
+
+  */

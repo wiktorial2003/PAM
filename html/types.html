@@ -1,171 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>PAM - Pollen Types</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #F5F5DC;
-      color: #2F4F2F;
-    }
-    nav {
-      width: 100%;
-      background: #9CAF88;
-      padding: 1rem 0;
-      position: relative;
-    }
-    .logo {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 200px;
-    }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    nav a {
-      color: #F5F5DC;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-    }
-    nav a:hover {
-      background: #7A8471;
-    }
-    h1 {
-      text-align: center;
-      margin: 2rem 0;
-      color: #2F4F2F;
-    }
-    .intro-panel {
-      background: #9CAF88;
-      color: #F5F5DC;
-      padding: 2rem;
-      margin: 2rem 0;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 800px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-    .intro-panel:hover {
-      background: #7A8471;
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-    .intro-panel h2 {
-      font-size: 2.5rem;
-      margin: 0 0 1rem 0;
-      color: #F5F5DC;
-    }
-    .intro-panel p {
-      font-size: 1.2rem;
-      margin: 0;
-    }
-    .pollen-cards {
-      width: 80%;
-      max-width: 800px;
-      margin: 2rem 0;
-    }
-    .pollen-card {
-      background: #9CAF88;
-      color: #F5F5DC;
-      padding: 2rem;
-      margin: 2rem 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      opacity: 0;
-      transition: all 0.6s ease;
-    }
-    .pollen-card:nth-child(1) {
-      transform: translateX(-100px);
-    }
-    .pollen-card:nth-child(2) {
-      transform: translateX(100px);
-    }
-    .pollen-card:nth-child(3) {
-      transform: translateX(-100px);
-    }
-    .pollen-card.slide-in {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .pollen-card h3 {
-      font-size: 1.8rem;
-      margin: 0 0 1rem 0;
-      color: #F5F5DC;
-    }
-    #animation .text-xl {
-      font-size: 1.5rem;
-      color: currentColor;
-      letter-spacing: 0.06em;
-    }
-    .pollen-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .flip-card-container {
-      display: flex;
-      gap: 2rem; 
-      justify-content: center; 
-    }
-
-    .flip-card {
-      width: 300px;
-      height: 300px; 
-      perspective: 1000px;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-    }
-
-    .flip-card-front {
-      background-color: #bbb;
-      color: black;
-    }
-
-    .flip-card-back {
-      background-color: #2980b9;
-      color: white;
-      transform: rotateY(180deg);
-    }
-
-
-  </style>
+  <link rel="stylesheet" href="../css/types.css">
 </head>
 <body>
   <nav>
-    <img src="../LOGO.png" alt="PAM Logo" class="logo">
+    <img src="../assets/pam.png" alt="PAM Logo" class="logo">
     <ul>
       <li><a href="main.html">Home</a></li>
       <li><a href="types.html">Pollen Types</a></li>
@@ -173,160 +16,157 @@
       <li><a href="about.html">About</a></li>
     </ul>
   </nav>
-  
-  <h1>Pollen Types</h1>
-  
- 
-  <div class="large grid centered square-grid">
-  <h2 class="text-xl">Common Pollen Types</h2>
-</div>
-    <p>Learn about different types of pollen that affect air quality and allergies, and examples of each</p>
-  </div>
 
-  
-  <div class="pollen-cards">
+  <header>
+    <h1>Pollen Types</h1>
+    <h2 class="text-xl">Common Pollen Types</h2>
+    <p>Learn about different types of pollen that affect air quality and allergies, and examples of each.</p>
+  </header>
+
+  <main class="pollen-cards">
+
+    <!-- Tree Pollen -->
     <div class="pollen-card">
       <h3>Tree Pollen</h3>
       <p>Common in spring, tree pollen from oak, birch, and maple trees can trigger seasonal allergies.</p>
-    </div>
-
-   <div class="flip-card-container">
-    <!-- Flip Card 1 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/BIRCH.jpg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Birch Tree</h1>
-          <p> Common in the Northeast, Upper Midwest and parts of the Atlantic. Birch pollen is abunfdant in states like Minnesota, Wisconsin,New York, and New England.</p>
-          <p> Blooms in March to May, peaking in April.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/CEDAR.jpeg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Cedar Tree</h1>
-          <p> Found in the South and Southwest, especially in Texas, Oklahoma and parts of Arizona.</p>
-          <p> Bloom season is mainly December to March with a peak in January and February. </p>
-        </div>
-      </div>
-    </div>
+      <div class="flip-card-container">
         <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/OAK.webp" alt="Avatar" style="width:300px;height:300px;">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/BIRCH.jpg" alt="Birch Tree" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Birch Tree</h1>
+              <p>Common in the Northeast, Upper Midwest, and parts of the Atlantic. Abundant in Minnesota, Wisconsin, New York, and New England.</p>
+              <p>Blooms March to May, peaking in April.</p>
+            </div>
+          </div>
         </div>
-        <div class="flip-card-back">
-          <h1>Oak Tree</h1>
-          <p> Abundant in the Southeast, Midwest and Northeast.The key states that it is found include Texas, Georgia, Missouri, Pensnsylvania and New York.</p>
-          <p> Blooming typically March to June, peaking around April and May.</p>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/CEDAR.jpeg" alt="Cedar Tree" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Cedar Tree</h1>
+              <p>Found in the South and Southwest, especially Texas, Oklahoma, and parts of Arizona.</p>
+              <p>Bloom season: December to March, peak in January-February.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/OAK.webp" alt="Oak Tree" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Oak Tree</h1>
+              <p>Abundant in Southeast, Midwest, and Northeast: Texas, Georgia, Missouri, Pennsylvania, and New York.</p>
+              <p>Blooms March to June, peaking April-May.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-  
+    <!-- Grass Pollen -->
     <div class="pollen-card">
       <h3>Grass</h3>
       <p>Peak season is late spring to early summer. Bermuda and Timothy grass are major contributors.</p>
-    </div>
-    <div class="flip-card-container">
-    <!-- Flip Card 2 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/FESCUE.jpg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Fescue Grass</h1>
-          <p> Found primarily in the Midwest, Mid-Atlantic and parts of Northeast.common in states such as Ohio, Pennsylvania and New York.</p>
-          <p> Blooms mainly in May to July, peaking in late spring to early summer.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/BAHIA.jpg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Bahia Grass</h1>
-          <p> Native and widespread in the Southeast and Gulf Coast states, particularly Florida, Louisiana, Alabama and Georgia.</p>
-          <p> Bloom season around April to October.</p>
-        </div>
-      </div>
-    </div>
+      <div class="flip-card-container">
         <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/RYEGRASS.jpg" alt="Avatar" style="width:300px;height:300px;">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/FESCUE.jpg" alt="Fescue Grass" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Fescue Grass</h1>
+              <p>Found in Midwest, Mid-Atlantic, and parts of Northeast: Ohio, Pennsylvania, New York.</p>
+              <p>Blooms May to July.</p>
+            </div>
+          </div>
         </div>
-        <div class="flip-card-back">
-          <h1>Rye Grass</h1>
-          <p> Common in the Pacific Northwest,Northeast and northern Midwest.States include Washington,Oregon, New York and Michigan</p>
-          <p> Blooms mainly April ro June.</p>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/BAHIA.jpg" alt="Bahia Grass" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Bahia Grass</h1>
+              <p>Native and widespread in Southeast and Gulf Coast: Florida, Louisiana, Alabama, Georgia.</p>
+              <p>Bloom April to October.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/RYEGRASS.jpg" alt="Rye Grass" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Rye Grass</h1>
+              <p>Common in Pacific Northwest, Northeast, and northern Midwest: Washington, Oregon, New York, Michigan.</p>
+              <p>Blooms April to June.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- Weed Pollen -->
     <div class="pollen-card">
-      <h3> Weed Pollen</h3>
-      <p> Most active in fall, ragweed is the most common weed pollen causing allergic reactions.</p>
-    </div>
-  </div>
-  <div class="flip-card-container">
-    <!-- Flip Card 3 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/RAGWEED.jpg" alt="Avatar" style="width:300px;height:300px;">
+      <h3>Weed Pollen</h3>
+      <p>Most active in fall; ragweed is the most common weed pollen causing allergic reactions.</p>
+      <div class="flip-card-container">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/RAGWEED.jpg" alt="Ragweed" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Ragweed</h1>
+              <p>Common in Midwest, Northeast, and Southeast: Illinois, Ohio, Pennsylvania, New York, Tennessee.</p>
+              <p>Blooms August to November, peak in September.</p>
+            </div>
+          </div>
         </div>
-        <div class="flip-card-back">
-          <h1>Ragweed</h1>
-          <p> One of the most common and widespread weed pollens. Found predominantly in the Midwest, Northeast and Southeast.States with high ragweeds pollen include Illinois, Ohio, Pennsylvania, New York and Tennessee.</p>
-          <p> Blooms from August to November peaking in September.</p>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/RUSSIAN.jpg" alt="Russian Thistle" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Russian Thistle</h1>
+              <p>Found in arid/semi-arid Southwest: Texas, New Mexico, Arizona, California.</p>
+              <p>Blooms August to October.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="../assets/PIGWEED.jpg" alt="Pigweed" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>Pigweed</h1>
+              <p>Common in Midwest and Southern states: Arkansas, Oklahoma, Texas, Missouri.</p>
+              <p>Blooms July to October.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/RUSSIAN.jpg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Russian Thistle</h1>
-          <p> Mostly found in the arid and semi-arid regions of the Southwest, including parts of Texas,New Mexico, Arizona and Carlifornia.</p>
-          <p> Blooming season is from August to October.</p>
-        </div>
-      </div>
-    </div>
-        <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="/assets/PIGWEED.jpg" alt="Avatar" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-          <h1>Pigweed</h1>
-          <p> Common in the Midwest and Southern states, including states like Arkansas,Oklahoma, Texas and Missouri.</p>
-          <p> Blooms mainly July to October.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+  </main>
+
   <script>
     const cards = document.querySelectorAll('.pollen-card');
-    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -334,10 +174,8 @@
         }
       });
     }, { threshold: 0.1 });
-    
-    cards.forEach(card => {
-      observer.observe(card);
-    });
+
+    cards.forEach(card => observer.observe(card));
   </script>
 </body>
 </html>

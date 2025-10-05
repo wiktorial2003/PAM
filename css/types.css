@@ -1,0 +1,157 @@
+/* General styles */
+body {
+  margin: 0;
+  padding: 0;
+  background: #EDE6D6;
+  font-family: Arial, sans-serif;
+  color: #2F4F2F;
+  background-image: url('../assets/cartographer (1).png');
+  background-repeat: repeat;
+}
+
+nav {
+  background: #18392B;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  left: 1rem;
+  height: 50px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #F5F5DC;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+nav a:hover {
+  background: #7A8471;
+  border-radius: 5px;
+}
+
+/* Header */
+header {
+  padding: 2rem;
+}
+
+header h1 {
+  margin: 0.5rem 0;
+  font-size: 2.5rem;
+  text-align: center; 
+}
+
+header h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  text-align: center; 
+}
+
+header p {
+  font-size: 1rem;
+  text-align: center; 
+}
+
+
+/* Pollen cards container */
+.pollen-cards {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Individual pollen card */
+.pollen-card {
+  background: #2F4F2F;
+  color: #F5F5DC;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s ease;
+  position: center;
+}
+
+.pollen-card.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pollen-card h3 {
+  margin: 0 0 1rem 0;
+}
+
+/* Flip cards container */
+.flip-card-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Flip card */
+.flip-card {
+  width: 200px;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.flip-card-front img,
+.flip-card-back img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+}
+
+.flip-card-back {
+  background-color: #EDE6D6;
+  color: #000000;
+  transform: rotateY(180deg);
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  overflow-y: auto;
+}
