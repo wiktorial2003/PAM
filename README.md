@@ -1,4 +1,7 @@
 # P.A.M Pollen Alert Map
+
+[Watch our demo here](https://www.spaceappschallenge.org/2025/challenges/bloomwatch-an-earth-observation-application-for-global-flowering-phenology/](https://tusmm-my.sharepoint.com/:f:/g/personal/a00303784_student_tus_ie/EssSzmyR9I9Ok47ofWcmiqoBV4dABGY-5zlAH3bMIAQNAQ?e=n62kUw))
+
 <img width="1900" height="864" alt="Screenshot 2025-10-10 141202" src="https://github.com/user-attachments/assets/c353b931-52ab-45ad-af21-5a0d9a7ac631" />
 <img width="1904" height="865" alt="Screenshot 2025-10-10 145843" src="https://github.com/user-attachments/assets/e6b63e14-a995-4fe2-859f-1f7e4cc1a366" />
 <img width="1890" height="818" alt="Screenshot 2025-10-10 145916" src="https://github.com/user-attachments/assets/bfdd8542-af6e-48fb-8166-97a715b5eb11" />
@@ -23,9 +26,18 @@ We chose the challenge  [BloomWatch: An Earth Observation Application for Global
 - Pollen info helps users learn what types appear, where, and when
 
 # Tehnical Overview
-Data Sources: Google Cloud Pollen API, Google Maps API, NASA MODIS NDVI GeoTIFF (16 day, 250m resolution)  
-Processing: JavaScript, Jupyter Notebook (Python), calculation pipeline that combines linear trends, seasonal cycles, and environmental fluctuations    
-Visualization: HTML, CSS, JavaScript  
+Data Sources:  
+- Google Cloud Pollen API
+- Google Maps API
+- NASA MODIS NDVI GeoTIFF (16-day, 250 m resolution)
+
+Processing:  
+- JavaScript & Jupyter Notebook (Python)
+- Forecast pipeline combining linear trends (NDVI Jan–Sep 2025), seasonal cycles, and environmental fluctuations
+- Forecast validated against 5 day pollen data from Google Pollen API
+
+Visualization:  
+- HTML, CSS, JavaScript
 
 Why NASA MODIS?
 - Uses MODIS Vegetation Indices (NDVI) to measure vegetation growth and greenness which are strong indicators of pollen production.
